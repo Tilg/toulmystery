@@ -17,8 +17,4 @@ public class Route {
 	public void deleteCheckpoint(Checkpoint checkpoint){
 		checkpointList.Remove(checkpoint);
 	}
-	
-	public void lauchNextModule(){
-		//TODO : on apelle le controleur en lui passant le current module afin qui l'ance le module suivant
-	}
 }

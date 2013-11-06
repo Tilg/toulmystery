@@ -9,6 +9,7 @@ public class Checkpoint {
 	private float longitude;
 	private float range;
 	private ArrayList gameModulesList;
+	private GameModule curentGameModule; 
 	
 	public Checkpoint (int id, string adress, float latitude, float longitude, float range)
 	{

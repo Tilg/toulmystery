@@ -1,10 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Models/Scale.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Scaling/CalcScale.cs">
     <Files>
-      <File FileName="Assets/Models/GPSPoint.cs" Line="22" Column="3" />
-      <File FileName="Assets/Scripts/FPSFlyWalk.cs" Line="1" Column="1" />
-      <File FileName="Assets/Models/Scale.cs" Line="4" Column="14" />
+      <File FileName="Assets/Models/GPSPoint.cs" Line="16" Column="40" />
+      <File FileName="Assets/Models/Scale.cs" Line="66" Column="25" />
+      <File FileName="Assets/Scripts/Scaling/CalcScale.cs" Line="14" Column="56" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

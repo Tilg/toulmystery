@@ -1,0 +1,4 @@
+DEFAUT;http://www.crai.archi.fr
+ILOT44BAT5;http://www.culture.gouv.fr/public/mistral/merimee_fr?ACTION=CHERCHER&FIELD_98=REF&VALUE_98=PA00106408
+ILOT27BAT29;http://www.culture.gouv.fr/public/mistral/merimee_fr?ACTION=CHERCHER&FIELD_98=REF&VALUE_98=PA00106403
+ILOT35EGLISE;http://www.culture.gouv.fr/public/mistral/merimee_fr?ACTION=CHERCHER&FIELD_98=REF&VALUE_98=PA00106375

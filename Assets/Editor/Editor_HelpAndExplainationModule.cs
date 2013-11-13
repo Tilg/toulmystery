@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class HelpAndExplainationModule {
+public class Editor_HelpAndExplainationModule : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

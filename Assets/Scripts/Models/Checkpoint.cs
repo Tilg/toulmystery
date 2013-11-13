@@ -1,15 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-public class Checkpoint {
+public class Checkpoint : MonoBehaviour{
 	
-	private int id;
-	private string adress;
-	private float latitude;
-	private float longitude;
-	private float range;
-	private ArrayList gameModulesList;
-	private GameModule curentGameModule; 
+	public int id;
+	public string adress;
+	public float latitude;
+	public float longitude;
+	public float range;
+	public ArrayList gameModulesList;
+	public GameModule curentGameModule; 
 	
 	public Checkpoint (int id, string adress, float latitude, float longitude, float range)
 	{

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
 /// <summary>
@@ -10,16 +11,14 @@ using System.Collections;
 /// <param name="timeout">The timeout.</param>
 /// <param name="smartTrace">if set to <c>true</c> [smart trace].</param>
 /// <returns></returns>
-public abstract class GameModule {
+public abstract class GameModule : MonoBehaviour{
 
-	private string title;
-	private string description;
-	private string soundUrl;
+	public string title;
+	public string description;
+	public string soundUrl;
 	
-	public GameModule(string _title, string _description, string _soundUrl){
-		this.title = _title;
-		this.description = _description;
-		this.soundUrl = _soundUrl;
+	public GameModule(){
+		
 	}	
 	
 	public bool isFinished(){

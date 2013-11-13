@@ -1,10 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Scaling/CalcScale.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Models/Scale.cs">
     <Files>
-      <File FileName="Assets/Models/GPSPoint.cs" Line="16" Column="40" />
-      <File FileName="Assets/Models/Scale.cs" Line="66" Column="25" />
-      <File FileName="Assets/Scripts/Scaling/CalcScale.cs" Line="14" Column="56" />
+      <File FileName="Assets/Models/GPSPoint.cs" Line="33" Column="6" />
+      <File FileName="Assets/Scripts/Scaling/CalcScale.cs" Line="11" Column="69" />
+      <File FileName="Assets/Scripts/Roll over/RollOver.cs" Line="1" Column="1" />
+      <File FileName="Assets/Editor/EditorGPSPoint.cs" Line="15" Column="22" />
+      <File FileName="Assets/Models/Scale.cs" Line="83" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

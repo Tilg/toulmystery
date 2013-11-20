@@ -6,6 +6,8 @@ public class GPSPoint : MonoBehaviour {
 	public double lat = .0;
 	public double lng = .0;
 	
+	public GPSPoint (){}
+	
 	public GPSPoint (double lat, double lng)
 	{
 		this.lat = lat;

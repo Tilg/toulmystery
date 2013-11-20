@@ -2,13 +2,16 @@ using UnityEngine;
 using System.Collections;
 
 public static class Scale {
-
+	
+	private const double EARTHRADIUS = (6378.2492 + 6356.515) /2; // Clarke 1880 IGN
+	
 	public static double ToRadian(double angle){
 	    return Mathf.PI * angle / 180.0;
 	}
+	
 		
 	private static double getDistWorld(GPSPoint a, GPSPoint b){
-	    const double radius = 6371; // in km
+		
 	    double latitude = ToRadian(b.lat - a.lat) / 2;
 	    double longitude = ToRadian(b.lng - a.lng) / 2;
 	 
@@ -16,7 +19,7 @@ public static class Scale {
 	                                                         Mathf.Cos((float)ToRadian(a.lat)) * Mathf.Cos((float)ToRadian(b.lat));
 	    double y = 2 * Mathf.Atan2((float)Mathf.Sqrt((float)x), Mathf.Sqrt((float)(1 - x)));
 	 
-	    return radius * y;
+	    return EARTHRADIUS * y;
 	}
 	
 	// Returns distance between 2 GPS poins in Kilometers
@@ -59,6 +62,36 @@ public static class Scale {
 		return (distG1G2 / distM1M2);	
 	}
 	
+	/*
+	// Return a scale ratio for a longitude
+	private static double getXRatio() {
+		
+		GameObject mapPoint1 = GameObject.Find("MapPoint1"); 
+		GameObject mapPoint2 = GameObject.Find("MapPoint2"); 
+	
+		GPSPoint gpsPoint1 = (GPSPoint) mapPoint1.GetComponent("GPSPoint");
+		GPSPoint gpsPoint2 = (GPSPoint) mapPoint2.GetComponent("GPSPoint");
+		
+		// convert lat/long to radians
+		double lat1 = ToRadian(gpsPoint1.lat);
+		double lat2 = ToRadian(gpsPoint2.lat);
+		double lng1 = ToRadian(gpsPoint1.lng);
+		double lng2 = ToRadian(gpsPoint2.lng);
+		
+		// adjust position by radians
+		lat1 -= 1.570795765134; // subtract 90 degrees (in radians)
+		lat2 -= 1.570795765134; // subtract 90 degrees (in radians)
+		
+		// Calculus of estimate point
+		double xlng1 =  (double) EARTHRADIUS * Mathf.Cos((float)lat1) * Mathf.Cos((float)lng1); 
+		double xlng2 =  (double) EARTHRADIUS * Mathf.Cos((float)lat2) * Mathf.Cos((float)lng2);
+		
+		double x1 = mapPoint1.transform.position.x;
+		double x2 = mapPoint2.transform.position.x;
+		
+		return (((x1/xlng1) + (x2/xlng2))/2) ;
+	}
+	
 	
 	// Return a scale ratio for a latitude
 	private static double getZRatio() {
@@ -69,8 +102,6 @@ public static class Scale {
 		GPSPoint gpsPoint1 = (GPSPoint) mapPoint1.GetComponent("GPSPoint");
 		GPSPoint gpsPoint2 = (GPSPoint) mapPoint2.GetComponent("GPSPoint");
 		
-		int earthRad = 6371;
-		
 		// convert lat/long to radians
 		double lat1 = ToRadian(gpsPoint1.lat);
 		double lat2 = ToRadian(gpsPoint2.lat);
@@ -82,80 +113,121 @@ public static class Scale {
 		lat2 -= 1.570795765134; // subtract 90 degrees (in radians)
 		
 		// Calculus of estimate point
-		double zlat1 =  (double) earthRad * Mathf.Sin((float)lat1) * Mathf.Sin((float)lng1); 
-		double zlat2 =  (double) earthRad * Mathf.Sin((float)lat2) * Mathf.Sin((float)lng2);
+		double zlat1 =  (double) EARTHRADIUS * Mathf.Cos((float)lat1) * Mathf.Sin((float)lng1); 
+		double zlat2 =  (double) EARTHRADIUS * Mathf.Cos((float)lat2) * Mathf.Sin((float)lng2);
 		
 		double z1 = mapPoint1.transform.position.z;
 		double z2 = mapPoint2.transform.position.z;
 		
 		return (((z1/zlat1) + (z2/zlat2))/2) ;
 	}
+		*/
 	
-	// Return a scale ratio for a longitude
-	private static double getXRatio() {
-		
-		GameObject mapPoint1 = GameObject.Find("MapPoint1"); 
-		GameObject mapPoint2 = GameObject.Find("MapPoint2"); 
-		
-		// float x = (float) earthRad * Mathf.Cos((float)lng) * Mathf.Sin(90 - (float)lat);
-		
-		int earthRad = 6371;
-		
-		GPSPoint gpsPoint1 = (GPSPoint) mapPoint1.GetComponent("GPSPoint");
-		GPSPoint gpsPoint2 = (GPSPoint) mapPoint2.GetComponent("GPSPoint");
-		
-		
-		// convert lat/long to radians
-		double lat1 = ToRadian(gpsPoint1.lat);
-		double lat2 = ToRadian(gpsPoint2.lat);
-		double lng1 = ToRadian(gpsPoint1.lng);
-		double lng2 = ToRadian(gpsPoint2.lng);
-		
-		// adjust position by radians
-		lat1 -= 1.570795765134; // subtract 90 degrees (in radians)
-		lat2 -= 1.570795765134; // subtract 90 degrees (in radians)
-		
-		// Calculus of estimate point
-		double xlng1 =  (double) earthRad * Mathf.Sin((float)lat1) * Mathf.Cos((float)lng1); 
-		double xlng2 =  (double) earthRad * Mathf.Sin((float)lat2) * Mathf.Cos((float)lng2);
-		double x1 = mapPoint1.transform.position.x;
-		double x2 = mapPoint2.transform.position.x;
-		
-		return (((x1/xlng1) + (x2/xlng2))/2) ;
-	}
-	
-	// Convert a Z coordonate (Unity units) in a Latitude (in degrees)
-	public static double ZAxis2Lat(double zCoord){
-		// TODO: Finish this function
-	}
-	
-	// Convert a X coordonate (Unity units) in a Longitude (in degrees)
-	public static double XAxis2Lng(double xCoord){
-		// TODO: Finish this function
-	}
-	
-	// Convert a Latitude (in degrees) in a Z coordonate (Unity units)
-	public static double Lat2Zaxis(double lat){
-		// TODO: Finish this function
-	}
-	
-	// Convert a Latitude (in degrees) in a X coordonate (Unity units)
-	public static double Lng2Xaxis(double lng){
-		// TODO: Finish this function
-	}
 	
 	// locate a gameObject on the map with a given lat and lng
 	public static void placeGameobjectAt(GameObject o, double lat, double lng){ 
-		o.transform.position = new Vector3((float)Lng2Xaxis(lng),10,(float)Lat2Zaxis(lat));
+		
+		/*
+		// convert lat/long to radians
+		lat = ToRadian(lat);
+		lng = ToRadian(lng);
+		
+		// adjust position by radians
+		lat -= 1.570795765134; // subtract 90 degrees (in radians)
+
+		// calculus of estimate point (reality)
+		double x =  (double) EARTHRADIUS * Mathf.Cos((float)lat) * Mathf.Cos((float)lng); 
+		double z =  (double) EARTHRADIUS * Mathf.Cos((float)lat) * Mathf.Sin((float)lng);
+		
+		// calculus of estimate point (unity)
+		x = x * getXRatio();
+		z = z * getZRatio();
+		*/
+		
+		GameObject mapPoint1 = GameObject.Find("MapPoint1"); 
+		GPSPoint gpsPoint1 = (GPSPoint) mapPoint1.GetComponent("GPSPoint");
+		
+		GameObject mapPoint2 = GameObject.Find("MapPoint2"); 
+		GPSPoint gpsPoint2 = (GPSPoint) mapPoint2.GetComponent("GPSPoint");
+		
+		Debug.Log (lat + "  " +  lng);
+		
+		// mappoint 1
+		 double x1 = mapPoint1.transform.position.x;
+		 double lng1 = gpsPoint1.lng;
+		double z1 = mapPoint1.transform.position.z;
+		
+		// mappoint 2
+		 double x2 = mapPoint2.transform.position.x;
+		 double lng2 = gpsPoint2.lng;
+		double lat2 = gpsPoint2.lat;
+		double z2 = mapPoint2.transform.position.z;
+		
+		double x = (lng-lng2) * ratioX() + x2;
+		double z = (lat-lat2) * ratioZ() + z2;
+		
+		Debug.Log (x +" "+ z);
+		// et the new game object position
+		o.transform.position = new Vector3((float)x,20,(float)z);
 	}
+	
 	
 	// locate a gameObject in the real world (returns a GPSPoint)
 	public static GPSPoint getGameobjectLocation(GameObject o){
-		return new GPSPoint(
-				ZAxis2Lat(o.transform.position.z),
-				XAxis2Lng(o.transform.position.x)
-			);
+		// TODO: finisih this function
+		return new GPSPoint();
+		
 	}
+	
+
+	private static double ratioX() {
+		GameObject mapPoint1 = GameObject.Find("MapPoint1"); 
+		GPSPoint gpsPoint1 = (GPSPoint) mapPoint1.GetComponent("GPSPoint");
+		
+		GameObject mapPoint2 = GameObject.Find("MapPoint2"); 
+		GPSPoint gpsPoint2 = (GPSPoint) mapPoint2.GetComponent("GPSPoint");
+		
+		// mappoint 1
+		 double x1 = mapPoint1.transform.position.x;
+		 double lng1 = gpsPoint1.lng;
+
+		
+		// mappoint 2
+		 double x2 = mapPoint2.transform.position.x;
+		 double lng2 = gpsPoint2.lng;
+
+		return (x1-x2)/(lng1-lng2);
+		
+	}
+	
+	private static double ratioZ() {
+		GameObject mapPoint1 = GameObject.Find("MapPoint1"); 
+		GPSPoint gpsPoint1 = (GPSPoint) mapPoint1.GetComponent("GPSPoint");
+		
+		GameObject mapPoint2 = GameObject.Find("MapPoint2"); 
+		GPSPoint gpsPoint2 = (GPSPoint) mapPoint2.GetComponent("GPSPoint");
+		
+		// mappoint 1
+		 double z1 = mapPoint1.transform.position.z;
+		 double lat1 = gpsPoint1.lat;
+
+		
+		// mappoint 2
+		 double z2 = mapPoint2.transform.position.z;
+		 double lat2 = gpsPoint2.lat;
+
+		return (z1-z2)/(lat1-lat2);
+		
+	}
+	
+	/*
+	
+	private static double getZ() {
+		GameObject mapPoint1 = GameObject.Find("MapPoint1"); 
+		GPSPoint gpsPoint1 = (GPSPoint) mapPoint1.GetComponent("GPSPoint");
+		
+	}
+	*/
 	
 	
 	public static string getInfo(){

@@ -18,9 +18,9 @@ public class Editor_GameModule : Editor {
     {
        GUILayout.BeginVertical();
              
-        _target.title = EditorGUILayout.TextField("chekpoint ID", _target.title);
-		_target.description = EditorGUILayout.TextField("Adresse", _target.description);
-		_target.soundUrl = EditorGUILayout.TextField("Latitude", _target.soundUrl);
+        _target.title = EditorGUILayout.TextField("titre", _target.title);
+		_target.description = EditorGUILayout.TextField("description", _target.description);
+		_target.soundUrl = EditorGUILayout.TextField("URL du son à lancer", _target.soundUrl);
            
        GUILayout.EndVertical();
  

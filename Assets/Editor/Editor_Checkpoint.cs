@@ -18,8 +18,8 @@ public class Editor_Checkpoint : Editor {
              
         _target.id = EditorGUILayout.IntField("chekpoint ID", _target.id);
 		_target.adress = EditorGUILayout.TextField("Adresse", _target.adress);
-		_target.longitude = EditorGUILayout.FloatField("Longitude", _target.longitude);
 		_target.latitude = EditorGUILayout.FloatField("Latitude", _target.latitude);
+		_target.longitude = EditorGUILayout.FloatField("Longitude", _target.longitude);
 		_target.range = EditorGUILayout.FloatField("Distance d'activation (en metre)", _target.range);
            
        GUILayout.EndVertical();

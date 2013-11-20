@@ -2,19 +2,21 @@ using UnityEngine;
 using System.Collections;
 
 public class QuestionResponseModule : MonoBehaviour {
-
-	public ArrayList responseList;
 	
-	public QuestionResponseModule(){
-		
+	public int id;
+	public ArrayList questionList;
+	
+	public QuestionResponseModule(int id){
+		this.id = id;
+		questionList = new ArrayList();
 	}
 	
 	public void addElement( Response element ){
-		responseList.Add(element);
+		questionList.Add(element);
 	}
 	
 	public void removeElement(Response element){
-		responseList.Remove(element);
+		questionList.Remove(element);
 	}
 	
 	
@@ -30,5 +32,13 @@ public class QuestionResponseModule : MonoBehaviour {
 		return true; //if all the response are correct, we pass the foreach and return true
 		*/
 		return false;
+	}
+	
+	void OnGUI () {
+		
+	}
+	
+	void Start(){
+		GameObject gameObjectQuestion = GameObject.Find("QuestionResponseModule");
 	}
 }

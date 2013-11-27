@@ -4,6 +4,8 @@ using System.Collections;
 public static class Scale
 {
 	
+	public static float EARTHRADIUS = 6371;
+	
 	public static float ToRadian (float angle)
 	{
 		return Mathf.PI * angle / 180;
@@ -126,13 +128,7 @@ public static class Scale
 		return (((z1/zlat1) + (z2/zlat2))/2) ;
 	}
 		*/	
-	
-	// locate a gameObject in the real world (returns a GPSPoint)
-	public static GPSPoint getGameobjectLocation (GameObject o)
-	{
-		// TODO: finisih this function
-		return new GPSPoint ();
-	}
+
 
 	private static float ratioX ()
 	{
@@ -178,6 +174,76 @@ public static class Scale
 		
 	}
 	
+	
+	 private static float ratioLng ()
+	{
+		
+		GameObject mapPoint1 = GameObject.Find ("MapPoint1"); 
+		GPSPoint gpsPoint1 = (GPSPoint)mapPoint1.GetComponent ("GPSPoint");
+		
+		GameObject mapPoint2 = GameObject.Find ("MapPoint2"); 
+		GPSPoint gpsPoint2 = (GPSPoint)mapPoint2.GetComponent ("GPSPoint");
+		
+		// mappoint 1
+		float x1 = mapPoint1.transform.position.x;
+		float lng1 = gpsPoint1.lng;
+
+		
+		// mappoint 2
+		float x2 = mapPoint2.transform.position.x;
+		float lng2 = gpsPoint2.lng;
+
+		return (lng1 - lng2) / (x1 - x2) ;
+		
+	}
+	
+	private static float ratioLat ()
+	{
+		
+		GameObject mapPoint1 = GameObject.Find ("MapPoint1"); 
+		GPSPoint gpsPoint1 = (GPSPoint)mapPoint1.GetComponent ("GPSPoint");
+		
+		GameObject mapPoint2 = GameObject.Find ("MapPoint2"); 
+		GPSPoint gpsPoint2 = (GPSPoint)mapPoint2.GetComponent ("GPSPoint");
+		
+		// mappoint 1
+		float z1 = mapPoint1.transform.position.z;
+		float lat1 = gpsPoint1.lat;
+
+		
+		// mappoint 2
+		float z2 = mapPoint2.transform.position.z;
+		float lat2 = gpsPoint2.lat;
+
+		return  (lat1 - lat2) / (z1 - z2);
+		
+	}
+	
+	// locate a gameObject in the real world (returns a GPSPoint)
+	public static GPSPoint getGameObjectLocation (GameObject o) 
+	{
+		GPSPoint coords = new GPSPoint();
+		
+		GameObject mapPoint2 = GameObject.Find ("MapPoint2"); 
+		GPSPoint gpsPoint2 = (GPSPoint)mapPoint2.GetComponent ("GPSPoint");
+		
+		float x = o.transform.position.x;
+		float z = o.transform.position.z;
+		
+		// mappoint 2
+		float x2 = mapPoint2.transform.position.x;
+		float z2 = mapPoint2.transform.position.z;
+		
+		float lng2 = gpsPoint2.lng;
+		float lat2 = gpsPoint2.lat;
+
+		
+		coords.lng = (x - x2) * ratioLng () + lng2;
+		coords.lat = (z - z2) * ratioLat () + lat2;
+		
+		return coords;
+	}
+	
 	// locate a gameObject on the map with a given lat and lng
 	public static void placeGameObjectAt (GameObject o, double lat, double lng, double alt)
 	{ 
@@ -200,6 +266,37 @@ public static class Scale
 		// New game object position
 		o.transform.position = new Vector3 (x, (float)alt, z);
 	}
+	
+	
+	// Rotation 
+	/*
+	public static float getRotation(){
+		
+		float angle = 0;
+		
+		GameObject mapPoint1 = GameObject.Find ("MapPoint1"); 
+		GameObject mapPoint2 = GameObject.Find ("MapPoint2");
+		GameObject mapPoint3 = GameObject.Find ("MapPoint3");
+		
+		// récupération des coordonnées X/Z
+		// X1/Z1
+		float x1 = mapPoint1.transform.position.x;
+		float z1 = mapPoint1.transform.position.z;
+		
+		// X2/Z2
+		float x2 = mapPoint2.transform.position.x;
+		float z2 = mapPoint2.transform.position.z;
+		
+		// X3/Z3
+		float x3 = mapPoint3.transform.position.x;
+		float z3 = mapPoint3.transform.position.z;	
+		
+		
+		
+		
+		return angle;
+	}
+	*/
 	
 	public static string getInfo ()
 	{
@@ -235,3 +332,4 @@ public static class Scale
 	
 	
 }
+

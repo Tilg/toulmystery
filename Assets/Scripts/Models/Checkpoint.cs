@@ -1,31 +1,66 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
+using NotificationCenter;
 
+[CanEditMultipleObjects]
 public class Checkpoint : MonoBehaviour{
 	
 	public int id;
 	public string adress;
 	public float latitude;
 	public float longitude;
-	public float range;
-	public ArrayList gameModulesList;
-	public GameModule curentGameModule; 
+	public float range; 
 	
-	public Checkpoint (int id, string adress, float latitude, float longitude, float range)
-	{
-		this.id = id;
-		this.adress = adress;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.range = range;
-		gameModulesList = new ArrayList();
+	bool affiche = false;
+	
+	public Checkpoint (){}
+	
+	// fonction appelé une seule fois comme un constructeur, se lance avant le start
+	void Awake () {
+		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
+		
+		//on abonne ici le checkpoint aux differents modules
+		nsNotifCenter.addObserverSelectorNameObject(this,this.loadNextModule,"QuestionResponseModule",null);	
 	}
 	
-	public void addModule(GameModule newModule){
-		gameModulesList.Add(newModule);
+	void Start () {
 	}
 	
-	public void deleteModule(GameModule module){
-		gameModulesList.Remove(module);
+	public void loadNextModule(NSNotification aNotification){		
+		Debug.Log(aNotification.name);
+		
+		switch (aNotification.name){
+			
+			case ("QuestionResponseModule"):
+				Hashtable dictionnaireDonneesRecues = aNotification.userInfo;
+				Debug.Log(dictionnaireDonneesRecues["id"]);
+			
+				loadModule(((int)dictionnaireDonneesRecues["id"]));
+				break;
+				
+			default :
+				Debug.Log("AUCUN CAS CORRESPONDANT");
+				break;
+		}
 	}
+	
+	~Checkpoint(){
+		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
+		nsNotifCenter.removeObserver(this);
+	}
+	
+	public void loadModule(int id){
+		affiche = true;
+	}
+	
+	// fonction qui compose la GUI sur l'Ipad
+	void OnGUI () {
+		
+		if (affiche){
+			GUI.Label(new Rect (25, 50, 100, 30), "transition vers prochain module");
+		}
+		
+	}
+	
 }

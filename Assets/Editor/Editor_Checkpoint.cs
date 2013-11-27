@@ -20,7 +20,7 @@ public class Editor_Checkpoint : Editor {
 		_target.adress = EditorGUILayout.TextField("Adresse", _target.adress);
 		_target.longitude = EditorGUILayout.FloatField("Longitude", _target.longitude);
 		_target.latitude = EditorGUILayout.FloatField("Latitude", _target.latitude);
-		_target.range = EditorGUILayout.FloatField("Distance d'activation (en metre)", _target.range);
+		_target.range = EditorGUILayout.FloatField("Distance d'activation (en m)", _target.range);
            
        GUILayout.EndVertical();
  

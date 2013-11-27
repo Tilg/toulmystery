@@ -7,7 +7,7 @@ public class Editor_TextResponse : Editor {
 
 	TextResponse _target;
  
-    void OnEnable()
+    public void OnEnable()
     {
        _target = (TextResponse)target;
     }
@@ -21,7 +21,7 @@ public class Editor_TextResponse : Editor {
            
        GUILayout.EndVertical();
  
-       //If we changed the GUI aply the new values to the script
+       //If we changed the GUI apply the new values to the script
        if(GUI.changed)
        {
          EditorUtility.SetDirty(_target);        

@@ -1,25 +1,33 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
-[System.Serializable]
+[Serializable]
 public class Question : MonoBehaviour {
 
+	[SerializeField]
 	public int id;
-	public string label;
-	public ArrayList responseList;
 	
-	private string boxName; 
-	private string questionText; 
-	private string correctAnswer;
-	private string answer;
-	private string buttonText;
+	[SerializeField]
+	public string boxName; 
 	
-	public Question (int id, string label)
+	[SerializeField]
+	public string questionText; 
+	
+	[SerializeField]
+	public string correctAnswer;
+	
+	[SerializeField]
+	public string answer;
+	
+	[SerializeField]
+	public string buttonText;
+	
+	public Question ()
 	{
-		this.id = id;
-		this.label = label;
 	}
 	
+	/*
 	public void addResponse(Response response){
 		responseList.Add(response);
 	}
@@ -28,7 +36,7 @@ public class Question : MonoBehaviour {
 	public void removeResponse(Response response){
 		responseList.Remove(response);
 	}
-	
+	*/
 	
 	void OnGUI () {
 		
@@ -74,5 +82,32 @@ public class Question : MonoBehaviour {
 		correctAnswer = "4";
 		answer ="";
 		buttonText="valider";
+	}
+	
+	public int Id {
+		get {
+			return this.id;
+		}
+		set {
+			id = value;
+		}
+	}
+	
+	public string QuestionText {
+		get {
+			return this.questionText;
+		}
+		set {
+			questionText = value;
+		}
+	}
+
+	public string Answer {
+		get {
+			return this.answer;
+		}
+		set {
+			answer = value;
+		}
 	}
 }

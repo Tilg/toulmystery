@@ -3,12 +3,8 @@ using UnityEditor; // Dont forget to add this as we are extending the Editor
 using System.Collections;
  
 [CustomEditor(typeof(GPSPoint))] //Set tour script to extend the GPSPoint.cs
-public class EditorGPSPoint : Editor // Our script inherits from Editor
-{
-    // There is a variable called 'target' that comes from the Editor, its the script we are extending but to
-    // make it easy to use we will decalre a new variable called '_target' that will cast this 'target' to our script type
-    // otherwise you will need to cast it everytime you use it like this: int i = (ourType)target;
- 
+public class EditorGPSPoint : Editor { // Our script inherits from Editor 
+
     GPSPoint _target;
  
     void OnEnable() {
@@ -23,8 +19,8 @@ public class EditorGPSPoint : Editor // Our script inherits from Editor
 		float fltlat = 	EditorGUILayout.FloatField("Latitude",(float) _target.lat); // Common FLOAT field
 		float fltlng = EditorGUILayout.FloatField("Longitude",(float) _target.lng); // Common FLOAT field	
         
-		_target.lat = (double) fltlat; // Common INT field
-		_target.lng = (double) fltlng; // Common INT field	
+		_target.lat =  fltlat; // Common INT field
+		_target.lng =  fltlng; // Common INT field	
  
        GUILayout.EndVertical();
  

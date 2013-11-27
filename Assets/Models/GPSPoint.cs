@@ -3,19 +3,19 @@ using System.Collections;
 
 public class GPSPoint : MonoBehaviour {
 	
-	public double lat = .0;
-	public double lng = .0;
+	public float lat = 0;
+	public float lng = 0;
 	
 	public GPSPoint (){}
 	
-	public GPSPoint (double lat, double lng)
+	public GPSPoint (float lat, float lng)
 	{
 		this.lat = lat;
 		this.lng = lng;
 	}
 	
-	private double degreesToRadians(double angle) {
-   		return (Mathf.PI * angle / 180.0);
+	private float degreesToRadians(float angle) {
+   		return (Mathf.PI * angle / 180);
 	}
 	
 	public void convertToRadians(){
@@ -30,17 +30,5 @@ public class GPSPoint : MonoBehaviour {
 	public void print(){
 		print(this.toString());
 	}
-	
-	void Start () 
-    {
-       // TODO
-    }
- 
-    void Update () 
-    {
-       // TODO
-    }
-	
-	
 	
 }

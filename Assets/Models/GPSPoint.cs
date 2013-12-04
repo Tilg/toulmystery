@@ -23,12 +23,4 @@ public class GPSPoint : MonoBehaviour {
 		this.lng = degreesToRadians(this.lng);
 	}
 	
-	public string toString(){
-		return "GPSPoint[lat:" + this.lat + ", lng:"+ this.lng + "]";
-	}
-	
-	public void print(){
-		print(this.toString());
-	}
-	
 }

@@ -37,14 +37,21 @@ public static class Scale
 	}
 	
 	// Returns the distance between 2 GameObject
-	private static float getDistEucl (GameObject mapPoint1, GameObject mapPoint2)
+	public static float getDistEucl (float x1, float x2, float y1, float y2)
+	{
+		return Mathf.Sqrt (Mathf.Pow ((float)(x1 - x2), 2) + Mathf.Pow ((float)(y1 - y2), 2));
+	}
+	
+	
+	// Returns the distance between 2 GameObject
+	public static float getDistEuclBtwMapPoint (GameObject mapPoint1, GameObject mapPoint2)
 	{
 		float x1 = mapPoint1.transform.position.x;
 		float x2 = mapPoint2.transform.position.x;
 		float y1 = mapPoint1.transform.position.z;
 		float y2 = mapPoint2.transform.position.z;
 		
-		return Mathf.Sqrt (Mathf.Pow ((float)(x1 - x2), 2) + Mathf.Pow ((float)(y1 - y2), 2));
+		return getDistEucl(x1,x2,y1,y2);
 	}
 	
 	// Returns the ratio estimated between the distance covered in Unity and the distance in reality
@@ -62,7 +69,7 @@ public static class Scale
 		float distG1G2 = getDistWorldInM (gpsPoint1, gpsPoint2);
 		
 		// Distances in Unity3D
-		float distM1M2 = getDistEucl (mapPoint1, mapPoint2);
+		float distM1M2 = getDistEuclBtwMapPoint (mapPoint1, mapPoint2);
 
 		// global scale
 		return (distG1G2 / distM1M2);	
@@ -181,19 +188,19 @@ public static class Scale
 		GameObject mapPoint1 = GameObject.Find ("MapPoint1"); 
 		GPSPoint gpsPoint1 = (GPSPoint)mapPoint1.GetComponent ("GPSPoint");
 		
-		GameObject mapPoint2 = GameObject.Find ("MapPoint2"); 
-		GPSPoint gpsPoint2 = (GPSPoint)mapPoint2.GetComponent ("GPSPoint");
+		GameObject mapPoint3 = GameObject.Find ("MapPoint3"); 
+		GPSPoint gpsPoint3 = (GPSPoint)mapPoint3.GetComponent ("GPSPoint");
 		
 		// mappoint 1
 		float x1 = mapPoint1.transform.position.x;
 		float lng1 = gpsPoint1.lng;
 
 		
-		// mappoint 2
-		float x2 = mapPoint2.transform.position.x;
-		float lng2 = gpsPoint2.lng;
+		// mappoint 3
+		float x3 = mapPoint3.transform.position.x;
+		float lng3 = gpsPoint3.lng;
 
-		return (lng1 - lng2) / (x1 - x2) ;
+		return (lng1 - lng3) / (x1 - x3) ;
 		
 	}
 	
@@ -203,19 +210,19 @@ public static class Scale
 		GameObject mapPoint1 = GameObject.Find ("MapPoint1"); 
 		GPSPoint gpsPoint1 = (GPSPoint)mapPoint1.GetComponent ("GPSPoint");
 		
-		GameObject mapPoint2 = GameObject.Find ("MapPoint2"); 
-		GPSPoint gpsPoint2 = (GPSPoint)mapPoint2.GetComponent ("GPSPoint");
+		GameObject mapPoint3 = GameObject.Find ("MapPoint3"); 
+		GPSPoint gpsPoint3 = (GPSPoint)mapPoint3.GetComponent ("GPSPoint");
 		
 		// mappoint 1
 		float z1 = mapPoint1.transform.position.z;
 		float lat1 = gpsPoint1.lat;
 
 		
-		// mappoint 2
-		float z2 = mapPoint2.transform.position.z;
-		float lat2 = gpsPoint2.lat;
+		// mappoint 3
+		float z3 = mapPoint3.transform.position.z;
+		float lat3 = gpsPoint3.lat;
 
-		return  (lat1 - lat2) / (z1 - z2);
+		return  (lat1 - lat3) / (z1 - z3);
 		
 	}
 	
@@ -224,34 +231,73 @@ public static class Scale
 	{
 		GPSPoint coords = new GPSPoint();
 		
-		GameObject mapPoint2 = GameObject.Find ("MapPoint2"); 
-		GPSPoint gpsPoint2 = (GPSPoint)mapPoint2.GetComponent ("GPSPoint");
+		GameObject mapPoint3 = GameObject.Find ("MapPoint3"); 
+		GPSPoint gpsPoint3 = (GPSPoint)mapPoint3.GetComponent ("GPSPoint");
 		
 		float x = o.transform.position.x;
 		float z = o.transform.position.z;
 		
-		// mappoint 2
-		float x2 = mapPoint2.transform.position.x;
-		float z2 = mapPoint2.transform.position.z;
+		// mappoint 3
+		float x3 = mapPoint3.transform.position.x;
+		float z3 = mapPoint3.transform.position.z;
 		
-		float lng2 = gpsPoint2.lng;
-		float lat2 = gpsPoint2.lat;
+		float lng3 = gpsPoint3.lng;
+		float lat3 = gpsPoint3.lat;
 
 		
-		coords.lng = (x - x2) * ratioLng () + lng2;
-		coords.lat = (z - z2) * ratioLat () + lat2;
+		coords.lng = (x-x3) * ratioLng () + lng3;
+		coords.lat = (z-z3) * ratioLat () + lat3;
 		
 		return coords;
 	}
 	
-	// locate a gameObject on the map with a given lat and lng
-	public static void placeGameObjectAt (GameObject o, double lat, double lng, double alt)
-	{ 
-				
+	
+	public static void rotateMap(){
+		GameObject racine = GameObject.Find ("racine");
+		
+		// Scale.placeGameObjectAt(TestLocalisation,48.678607,5.891568,25);
+		// Scale.placeGameObjectAt (TestCamera,48.678607,5.891568,40);
+		
+		GameObject mapPoint1 = GameObject.Find ("MapPoint1"); 
+		GameObject mapPoint2 = GameObject.Find ("MapPoint2"); 
+
+		
+		GPSPoint A = (GPSPoint)mapPoint1.GetComponent ("GPSPoint"); // real coordonates		
+		GPSPoint B = (GPSPoint)mapPoint2.GetComponent ("GPSPoint"); // real coordonates
+		GPSPoint C = getGameObjectLocation (mapPoint2); // estimated coordonates
+		
+		Debug.Log ("coordonnees de test--> " + C.lat + "," + C.lng);
+		Debug.Log ("coordonnees attendues --> " + B.lat + "," + B.lng);
+		
+		float a = Scale.getDistWorldInM (B,C);
+		float b = Scale.getDistWorldInM (A,C);
+		float c = Scale.getDistWorldInM (A,B);
+		
+		Debug.Log ("Distance (BC): " + a);
+		Debug.Log ("Distance (AC): " + b);
+		Debug.Log ("Distance (AB): " + c);
+		
+		
+		// Théorème d'Al Kashi
+		float cosA = ((b*b)+(c*c)-(a*a))/(2*b*c); 
+		Debug.Log ("cos A: " + cosA);
+		float AcosA = Mathf.Acos(cosA);
+		
+		float angle= Mathf.Abs(180 * AcosA / Mathf.PI); 
+		
+		// Debug.Log ("Distance:" + dist);
+		Debug.Log ("Angle (degres):" + angle);
+		
+		angle = (racine.transform.eulerAngles.y) + angle;
+		
+		Debug.Log ("Rotation de:" + angle);
+		racine.transform.eulerAngles = new Vector3 (0, angle, 0);
+	}	
+	
+	public static Vector3 getPositionInUnity(double lat, double lng, double altInUnity) 
+	{
 		GameObject mapPoint2 = GameObject.Find ("MapPoint2"); 
 		GPSPoint gpsPoint2 = (GPSPoint)mapPoint2.GetComponent ("GPSPoint");
-		
-		Debug.Log (lat + "  " + lng);
 		
 		// mappoint 2
 		float x2 = mapPoint2.transform.position.x;
@@ -262,9 +308,16 @@ public static class Scale
 		float x = ((float)lng - lng2) * ratioX () + x2;
 		float z = ((float)lat - lat2) * ratioZ () + z2;
 		
-		Debug.Log (x + " " + z);
+		return new Vector3 (x, (float)altInUnity, z);
+		
+	}
+	
+	
+	// locate a gameObject on the map with a given lat and lng
+	public static void placeGameObjectAt (GameObject o, double lat, double lng, double altInUnity)
+	{ 
 		// New game object position
-		o.transform.position = new Vector3 (x, (float)alt, z);
+		o.transform.position = getPositionInUnity(lat,lng,altInUnity);
 	}
 	
 	
@@ -312,7 +365,7 @@ public static class Scale
 		float distG1G2 = getDistWorldInM (gpsPoint1, gpsPoint2);
 		
 		// Distances in Unity3D
-		float distM1M2 = getDistEucl (mapPoint1, mapPoint2);
+		float distM1M2 = getDistEuclBtwMapPoint (mapPoint1, mapPoint2);
 		
 		// sout
 		string sout = "** Real distances between: \n";

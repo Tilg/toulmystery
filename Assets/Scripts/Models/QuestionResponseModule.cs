@@ -18,6 +18,7 @@ public class QuestionResponseModule : MonoBehaviour {
 	
 	void Awake () {
 		idCurrentQuestion = 0;
+		
 	}
 	
 	void Start(){

@@ -4,31 +4,39 @@ using NotificationCenter;
 
 public class Checkpoint : MonoBehaviour{
 	
-	public string id; // id du checkpoint
+	public string id; // checkpointID
 	public float latitude;
 	public float longitude;
-	public float range; // distance a partir de laquelle le checkpoint va être activé
-	public string[] modulesList; //liste de module qui vont composer ce checkpoint
+	public float range; // this range is used to lauch the checkpoint if the user is closed enought of his latitude and longitude
+	public string[] modulesList; //list of all the ID of the modules who composed this checkpoint
 	
-	private string moduleName = "CheckpointModule"; // nom du module, sert a identifier le module lors des notifications observer/observable
-	
-	
-	/*boolean servant de flag, va etre a false si la question n'est pas validé, si il est mis a true on affiche une notification
-	 "bien joué" ou "mauvaise réponse en fonction de la reponse du joueur
-	 */
+	private NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
+	private string moduleName = "CheckpointModule";
 	bool affiche = false;
 	
 	public Checkpoint (){}
 	
-	// fonction appelé une seule fois comme un constructeur, se lance avant le start
 	void Awake () {
-		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
+		//The checkpoint are know listening for the starting notification comming from GameManager
+		nsNotifCenter.addObserverSelectorNameObject(this,this.startCheckpoint,"GameManager",null);
 		
 		//on abonne ici le checkpoint aux differents modules
-		nsNotifCenter.addObserverSelectorNameObject(this,this.loadNextModule,"QuestionResponseModule",null);	
+		nsNotifCenter.addObserverSelectorNameObject(this,this.loadNextModule,"QuestionResponseModule",null);
 	}
 	
 	void Start () {
+	}
+	
+	
+	public void startCheckpoint(NSNotification aNotification){
+		Hashtable dictionnaireDonneesRecues = aNotification.userInfo;
+		Debug.Log(dictionnaireDonneesRecues["ID"]);
+		
+		if (dictionnaireDonneesRecues["ID"].Equals(this.id)){
+			Debug.Log("c'est moi :"+ this.id);
+		}
+		else
+			Debug.Log("c'est pas moi"+ this.id);
 	}
 	
 	/** fonction apellée lors d'une notification de changement par un objet observé */

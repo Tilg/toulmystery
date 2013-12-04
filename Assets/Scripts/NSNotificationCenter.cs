@@ -122,11 +122,11 @@ namespace NotificationCenter {
 		//
 		// Parameters
 		// 		notificationObserver
-		// 			Object registering as an observer. This value must not be nil.
+		// 			Object registering as an observer. This value must not be null.
 		// 		notificationSelector
 		// 			Selector that specifies the message the receiver sends notificationObserver to notify it of the notification posting.
 		// 			The method specified by notificationSelector must have one and only one argument (an instance of NSNotification).
-		// 			This value must not be nil.
+		// 			This value must not be null.
 		// 		notificationName
 		// 			The name of the notification for which to register the observer; that is, only notifications with this name are delivered to the observer.
 		// 			If you pass nil, the notification center doesn’t use a notification’s name to decide whether to deliver it to the observer.

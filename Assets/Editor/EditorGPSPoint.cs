@@ -19,8 +19,8 @@ public class EditorGPSPoint : Editor { // Our script inherits from Editor
 		float fltlat = 	EditorGUILayout.FloatField("Latitude",(float) _target.lat); // Common FLOAT field
 		float fltlng = EditorGUILayout.FloatField("Longitude",(float) _target.lng); // Common FLOAT field	
         
-		_target.lat =  fltlat; // Common INT field
-		_target.lng =  fltlng; // Common INT field	
+		_target.lat =  fltlat; // Common float field
+		_target.lng =  fltlng; // Common float field	
  
        GUILayout.EndVertical();
  

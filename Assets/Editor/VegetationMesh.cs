@@ -136,7 +136,7 @@ public class VegetationMesh : MonoBehaviour {
 				IEnumerator e = points.GetEnumerator();
 				while (e.MoveNext()) {
 					n++;
-					GameObject tree = EditorUtility.InstantiatePrefab (prefabTrees[typeVegetation]) as GameObject;
+					GameObject tree = PrefabUtility.InstantiatePrefab(prefabTrees[typeVegetation]) as GameObject;
 					tree.transform.parent=meshTrees.transform;
 					
 					Vector3 v = (Vector3)e.Current+trans;

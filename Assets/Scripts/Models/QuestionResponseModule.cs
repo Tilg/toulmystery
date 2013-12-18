@@ -2,10 +2,8 @@ using UnityEngine;
 using System.Collections;
 using NotificationCenter;
 
-public class QuestionResponseModule : MonoBehaviour {
+public class QuestionResponseModule : GameModule {
 	
-	
-	public string id;
 	public string[] questions;
 	public string[] responses;
 	

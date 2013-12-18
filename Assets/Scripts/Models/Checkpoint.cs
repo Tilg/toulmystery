@@ -45,7 +45,7 @@ public class Checkpoint : MonoBehaviour{
 	
 	/* Used to know the reference of the gameModule of this checkpoint */
 	public void RecordModule(NSNotification aNotification){	
-		QuestionResponseModule newGameModule =  (QuestionResponseModule)aNotification.obj ;
+		GameModule newGameModule =  (GameModule) aNotification.obj ;
 		
 		foreach ( string id in modulesIDList){
 			

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class HelpAndExplainationModule : GameModule {
+public class HelpAndExplainationModule : GameModule{
 
 	public ArrayList sheetList;
 	

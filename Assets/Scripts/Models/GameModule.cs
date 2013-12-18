@@ -11,14 +11,13 @@ using System.Collections;
 /// <param name="smartTrace">if set to <c>true</c> [smart trace].</param>
 /// <returns></returns>
 public abstract class GameModule : MonoBehaviour{
-
+	
+	public string id;
 	public string title;
 	public string description;
 	public string soundUrl;
 	
-	public GameModule(){
-		
-	}	
+	public GameModule(){}	
 	
 	public bool isFinished(){
 		//TODO: la fonction va prevenir le conrôleur qu'elle se termine

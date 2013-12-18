@@ -183,11 +183,19 @@ namespace NotificationCenter {
 		// Note : This method is the preferred method for posting notifications.
 		public void postNotificationNameObjectUserInfo (String notificationName, System.Object notificationSender, Hashtable userInfo)  {
 			lock (objectLock) {  // ensure code is reentrant
+				
+				Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName+")test postNotificationNameObjectUserInfo 1");
 				List<ObserverSelectorSender> list = (List<ObserverSelectorSender>)dict[notificationName];
+				Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName+")test postNotificationNameObjectUserInfo 2");
 				if(list!=null) {
 					NSNotification not = NSNotification.notificationWithNameObjectUserInfo(notificationName, notificationSender, userInfo); 
+					Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName+")test postNotificationNameObjectUserInfo 3");
 					foreach (ObserverSelectorSender os in list) {
-						if ((os.sender==null) || (os.sender==notificationSender)) os.selector(not);
+						Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName+")test postNotificationNameObjectUserInfo 4");
+						if ((os.sender==null) || (os.sender==notificationSender)){
+							Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName+"test postNotificationNameObjectUserInfo 5");
+							os.selector(not);
+						}
 					}
 				}
 			}
@@ -203,9 +211,11 @@ namespace NotificationCenter {
 		// 		notificationSender
 		// 			Sender to remove from the dispatch table. Specify a notification sender to remove only entries that specify this sender. When nil, the receiver does not use notification senders as criteria for removal.
 		public void removeObserverNameObject (System.Object notificationObserver, String notificationName, System.Object notificationSender) {
+		
 			if (notificationObserver==null) return;
-	
+			
 			lock (objectLock) {  // ensure code is reentrant
+				
 				observerForPredicate = notificationObserver;
 				senderForPredicate = notificationSender;
 				

@@ -11,87 +11,111 @@ public class QuestionResponseModule : MonoBehaviour {
 	
 	private string moduleName = "QuestionResponseModule";
 	private string[] playerResponses;
-	private Hashtable dictionnaireDonneeSup;
-	private int idCurrentQuestion;
+	private int idCurrentQuestion=0;
 	
-	private NSNotificationCenter nsNotifCenter;
+	private bool display = false;
+	
+	//lauchedGameModuleID
 	
 	void Awake () {
-		idCurrentQuestion = 0;
 		
-	}
-	
-	void Start(){
-		// On initialise la hashtable contenant les informations supplémentaires passé lors des notifications
-		dictionnaireDonneeSup = new Hashtable();
-		dictionnaireDonneeSup.Add("id", id);
+		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
+		nsNotifCenter.addObserverSelectorNameObject(this,this.StartModule,"CheckpointModule",null);//The Module are know listening for the starting notification comming from GameManager
 		
-		// on notifie au checkpoint
-		nsNotifCenter.postNotificationNameObjectUserInfo(moduleName,this,dictionnaireDonneeSup);
-		
+		//we need to manually initialyze this table to be able to get te response with he GUI
 		playerResponses = new string[questions.Length];
 		for ( int i=0 ; i<questions.Length; i++){
 			playerResponses[i] = "";
 		}
-	}	
+	}
 	
-	// fonction qui compose la GUI sur l'Ipad
-	void OnGUI () {
+	// This fonction is called when we receive a notification from a checkpoint  
+	public void StartModule(NSNotification aNotification){
+		Hashtable dictionnaireDonneesRecues = aNotification.userInfo;
 		
-		GUI.BeginGroup (new Rect (Screen.width / 2 - 100, Screen.height / 2 - 150, 200, 300));
-	
-		/********************* Titre de la box contenant les questions **************************/ 
+		if (dictionnaireDonneesRecues["lauchedGameModuleID"] != null){ // if we are receiving a lauding Module request
 		
-		// Make a background box
-		GUI.Box(new Rect(0,0,200,300),"A vous de jouer ...");
-		
-		/********************* Composition de la Question/Reponce **************************/ 
-		
-		if (questions.Length > 0 ) { // si le tableau de question contient au moin une question
-			
-			//add the question label
-			GUI.Label(new Rect (25, 50, 100, 30), questions[idCurrentQuestion]);
-		
-			//add the textfield to get the answer
-			Debug.Log(playerResponses[idCurrentQuestion]);
-			playerResponses[idCurrentQuestion] = GUI.TextField (new Rect (25, 100, 100, 30), playerResponses[idCurrentQuestion]);
-			
-			/********************* Bouton de validation de la réponse **************************/ 
-			
-			// add the button used to validate the answer
-			if (GUI.Button (new Rect (25, 150, 100, 30), "valider")) {
-				
-				// This code is executed when the Button is clicked
-				if ( playerResponses[idCurrentQuestion].Equals(responses[idCurrentQuestion])){
-					
-					//on affiche un petit label de felicitation
-					GUI.Label(new Rect (25, 175, 100, 30),"bonne reponse");
-					
-					// on regarde si la question corante était la derniere de la liste de questions du module
-					if (idCurrentQuestion < questions.Length) { // si c'est pas la derniere on affiche la question suivante
-						idCurrentQuestion++;
-					}else{
-						// si c'était la dernière question du module
-					NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter; // on notifie au listener que le module est terminé
-					nsNotifCenter.postNotificationNameObjectUserInfo(moduleName,this,dictionnaireDonneeSup);
-					}
-					
-				}else{
-					GUI.Label(new Rect (25, 175, 100, 30), "mauvaise reponse");
-				}
-					
+			if (dictionnaireDonneesRecues["lauchedGameModuleID"].Equals(this.id)){
+				Debug.Log("("+this.id+") GAME MODULE --> c'est moi : "+ this.id);
+				this.display=true;
 			}
-			
+			else{
+				//Debug.Log("("+this.id+") GAME MODULE --> c'est pas moi : "+ this.id);
+			}	
 		}
-		else{ // si le module ne contenait aucune question, on le valide par defaut et on notifie l'observer pour appeler le module suivant
-			
-			// on envoi un message au checkpoint pour lui préciser que le module est terminé
-			nsNotifCenter.postNotificationNameObjectUserInfo(moduleName,this,dictionnaireDonneeSup);
-		}
-		
-		
+	}
 	
-		GUI.EndGroup ();
+	
+	// fonction used to construct the GUI
+	void OnGUI () {
+
+		if (display){
+			
+			GUI.BeginGroup (new Rect (Screen.width / 2 - 100, Screen.height / 2 - 150, 200, 300));
+	
+				/********************* Title of the box **************************/ 
+				
+				// Make a background box
+				GUI.Box(new Rect(0,0,200,300),"A vous de jouer ...");
+				
+				/********************* Question/Reponce fields **************************/ 
+				
+				if (questions.Length > 0 ) { // si le tableau de question contient au moin une question
+					
+					//add the question label
+					GUI.Label(new Rect (25, 50, 100, 30), questions[idCurrentQuestion]);
+				
+					//add the textfield to get the answer
+					Debug.Log(playerResponses[idCurrentQuestion]);
+					playerResponses[idCurrentQuestion] = GUI.TextField (new Rect (25, 100, 100, 30), playerResponses[idCurrentQuestion]);
+					
+					/********************* Response validator button **************************/ 
+
+					// add the button used to validate the answer
+					if (GUI.Button (new Rect (25, 150, 100, 30), "valider")) {
+						
+						// This code is executed when the Button is clicked
+						if ( playerResponses[idCurrentQuestion].Equals(responses[idCurrentQuestion])){
+							
+							Debug.Log("("+this.id+") GAME MODULE --> Reponse correcte");
+							
+							if (idCurrentQuestion < questions.Length-1) { // if we have other questions to diplay
+								Debug.Log("("+this.id+") GAME MODULE --> Question terminee : "+ questions[idCurrentQuestion]);
+								idCurrentQuestion++;
+								Debug.Log("("+this.id+") GAME MODULE --> Nouvelle Question : "+ questions[idCurrentQuestion]);
+							}else{ // if it was the last question of this gameModule
+								display=false;
+								this.FinishModule();
+							}
+							
+						}else{
+							Debug.Log("("+this.id+") GAME MODULE --> Reponse fausse !!!");
+						}		
+					}
+				}
+				else{ // if they are no question in this module, he is already finished
+					this.FinishModule();
+				}
+			
+			GUI.EndGroup ();
+		}
+	}
+	
+	//this methos is called when the module is finish (when all the questions are validated
+	public void FinishModule(){
+		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter; 
 		
+		Hashtable additionnalDataTable = new Hashtable();
+		additionnalDataTable.Add("finishedGameModuleID", id); // the finished gameModule add  his ID to the dataTable
+		
+		//the gameModule notify that he is finish
+		nsNotifCenter.postNotificationNameObjectUserInfo(moduleName,this,additionnalDataTable);
+		Debug.Log("("+this.id+") GAME MODULE --> module termine : "+ id);
+	}
+	
+	/* destructor, remove the observer if destroyed */
+	~QuestionResponseModule(){
+		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
+		nsNotifCenter.removeObserver(this);
 	}
 }

@@ -12,37 +12,54 @@ public class QuestionResponseModule : MonoBehaviour {
 	private string moduleName = "QuestionResponseModule";
 	private string[] playerResponses;
 	private int idCurrentQuestion=0;
-	
 	private bool display = false;
 	
-	//lauchedGameModuleID
+	private ArrayList checkpointsList;
+	private Checkpoint currentCheckpoint;
 	
 	void Awake () {
 		
-		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
-		nsNotifCenter.addObserverSelectorNameObject(this,this.StartModule,"CheckpointModule",null);//The Module are know listening for the starting notification comming from GameManager
+		checkpointsList = new ArrayList();
 		
 		//we need to manually initialyze this table to be able to get te response with he GUI
 		playerResponses = new string[questions.Length];
 		for ( int i=0 ; i<questions.Length; i++){
 			playerResponses[i] = "";
 		}
+		
+		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
+		nsNotifCenter.addObserverSelectorNameObject(this,this.RecordCheckpoint,"CheckpointModule",null);//The Module are know listening for the starting notification comming from GameManager
 	}
 	
-	// This fonction is called when we receive a notification from a checkpoint  
-	public void StartModule(NSNotification aNotification){
-		Hashtable dictionnaireDonneesRecues = aNotification.userInfo;
+	void Start(){
+		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter; // used to nity the checkpoints
+		nsNotifCenter.postNotificationNameObjectUserInfo(moduleName,this,null);
+	}
+	
+	/* Used to know the reference of the checkpoint using this gameModule */
+	public void RecordCheckpoint(NSNotification aNotification){	
 		
-		if (dictionnaireDonneesRecues["lauchedGameModuleID"] != null){ // if we are receiving a lauding Module request
+		Checkpoint newCheckpoint =  (Checkpoint)aNotification.obj ;
 		
-			if (dictionnaireDonneesRecues["lauchedGameModuleID"].Equals(this.id)){
-				Debug.Log("("+this.id+") GAME MODULE --> c'est moi : "+ this.id);
-				this.display=true;
+		Hashtable additionnalDataTable = aNotification.userInfo;
+		
+		string[] moduleIdList = (string[]) additionnalDataTable["GameModuleIdList"];
+		
+		foreach ( string moduleID in moduleIdList){
+			
+			if (moduleID.Equals(this.id)){ // if the gameModule find his id in the module id send by the checkpoint, the checkpoint who send the notification contains this module
+				
+				if (! checkpointsList.Contains(newCheckpoint)){
+					checkpointsList.Add(newCheckpoint);
+				} 	
 			}
-			else{
-				//Debug.Log("("+this.id+") GAME MODULE --> c'est pas moi : "+ this.id);
-			}	
-		}
+		}		
+	}
+	
+	
+	public void BeginModule(Checkpoint callingCheckpoint){
+		currentCheckpoint = callingCheckpoint;
+		display = true;
 	}
 	
 	
@@ -101,16 +118,9 @@ public class QuestionResponseModule : MonoBehaviour {
 		}
 	}
 	
-	//this methos is called when the module is finish (when all the questions are validated
+	//this methos is called when the module is finish (when all the questions are validated)
 	public void FinishModule(){
-		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter; 
-		
-		Hashtable additionnalDataTable = new Hashtable();
-		additionnalDataTable.Add("finishedGameModuleID", id); // the finished gameModule add  his ID to the dataTable
-		
-		//the gameModule notify that he is finish
-		nsNotifCenter.postNotificationNameObjectUserInfo(moduleName,this,additionnalDataTable);
-		Debug.Log("("+this.id+") GAME MODULE --> module termine : "+ id);
+		currentCheckpoint.FindNextModule(this.id);
 	}
 	
 	/* destructor, remove the observer if destroyed */

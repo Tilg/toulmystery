@@ -8,103 +8,88 @@ public class Checkpoint : MonoBehaviour{
 	public float latitude;
 	public float longitude;
 	public float range; // this range is used to lauch the checkpoint if the user is closed enought of his latitude and longitude
-	public string[] modulesList; //list of all the ID of the modules who composed this checkpoint
+	public string[] modulesIDList; //list of all the ID of the modules who composed this checkpoint
 	
-	private NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
+	private GameManager gameManager = null;
+	private ArrayList gameModuleList;
+	
 	private string moduleName = "CheckpointModule";
 	
 	public Checkpoint (){}
 	
 	/* Used to initiate the link between objetct with observer/observable pattern */
 	void Awake () {
+		
+		gameModuleList = new ArrayList();
+		
+		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
+		
 		//The checkpoint are know listening for the starting notification comming from GameManager
-		nsNotifCenter.addObserverSelectorNameObject(this,this.StartCheckpoint,"GameManager",null);
+		nsNotifCenter.addObserverSelectorNameObject(this,this.RecordGameManager,"GameManager",null);
+		nsNotifCenter.addObserverSelectorNameObject(this,this.RecordModule,"QuestionResponseModule",null);
 	}
 	
+	void Start(){
+		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
+		
+		Hashtable additionnalDataTable = new Hashtable();
+		additionnalDataTable.Add("GameModuleIdList", modulesIDList); // we add to the table the id off the module that we want to start
+		
+		nsNotifCenter.postNotificationNameObjectUserInfo(moduleName,this,additionnalDataTable);
+	}
 	
-	/* called when a notification is receive from the GameManager */
-	public void StartCheckpoint(NSNotification aNotification){
+	/* Used to know the reference of the gameManager */
+	public void RecordGameManager(NSNotification aNotification) {	
+		gameManager = (GameManager) aNotification.obj;
+	}
+	
+	/* Used to know the reference of the gameModule of this checkpoint */
+	public void RecordModule(NSNotification aNotification){	
+		QuestionResponseModule newGameModule =  (QuestionResponseModule)aNotification.obj ;
 		
-		
-		GameManager gm = (GameManager) aNotification.obj;
-		gm.bidon();
-		
-		Hashtable incommingData = aNotification.userInfo; // the gameManager send in the table the ID of the requested checkpoint
-		
-		// All the ckeckpoint are receiving the notification from Game Manager, 
-		if (incommingData["ID"].Equals(this.id)){ //if the checkpoint ID match with the reuested ID send by the game Manager
+		foreach ( string id in modulesIDList){
 			
-			Debug.Log("("+this.id+") CHECKPOINT --> c'est moi : "+ this.id);
-			
-			//The checkpoint are now listening the modules
-			nsNotifCenter.addObserverSelectorNameObject(this,this.LoadNextModule,"QuestionResponseModule",null);
-			
-			if (modulesList.Length > 0){ // if the checkpoint have at least 1 modue to lauch , we lauch the first gameModule
-				LoadModule(modulesList[0]);
+			if (id.Equals(newGameModule.id)){ // if the gameModule who send the notification is a game module of this checkpoint
+				
+				gameModuleList.Add(newGameModule);
 			}
-			else{ // if the checkpoint doesn't have a module, is he already finish
-				this.CheckpointFinish();
-			}	
+		}		
+	}
+	
+	/* this method is called by the game manager and allow to start a checkpoint */
+	public void Lauch(string targetedCheckpointID){
+		
+		if (targetedCheckpointID == null){
+			targetedCheckpointID = modulesIDList[0];
 		}
-		else
-			Debug.Log("("+this.id+") CHECKPOINT --> c'est pas moi : "+ this.id);
+		
+		foreach (QuestionResponseModule moduleX in gameModuleList){
+			if ( moduleX.id.Equals(targetedCheckpointID)){
+				moduleX.BeginModule(this);
+			}
+		}
 	}
 	
 	
-	/* fonction called when receiving a notification from a game module notifying that he is finished */
-	public void LoadNextModule(NSNotification aNotification){		
-		
-		Hashtable incommingData = aNotification.userInfo;
-		Debug.Log("("+this.id+") CHECKPOINT --> gameModule signifie qu'il est termine : "+incommingData["finishedGameModuleID"]);	
-		
+	
+	public void FindNextModule(string finishedModuleID){
 		
 		int position = 0;
 			
-		// we look for the position in the module list of the finished module who send the notification
-		for (int i=0; i< modulesList.Length; i++){
-			if ( modulesList[i].Equals(incommingData["finishedGameModuleID"])){
+		// we look for the position in the module list of the finished module
+		for (int i=0; i< modulesIDList.Length; i++){
+			if ( modulesIDList[i].Equals(finishedModuleID)){
 				position =i;
 			}
 		} 
 		
-		if (position == (modulesList.Length - 1)){// if the finished module was the last module of this checkpoint
-			Debug.Log("("+this.id+") CHECKPOINT --> fin du checkpoint...");	
-			this.CheckpointFinish();
+		if (position != (modulesIDList.Length - 1)){// if the finished module was not the last module of this checkpoint, we lauch the next module
+			this.Lauch(modulesIDList[position+1]);
+		}else{ // if the module who call this functio was the last of this checkpoint, we ask to the gameManager to lauch the next checkpoint
+			gameManager.LoadNextCheckpoint(this.id);
 		}
-		else{
-			Debug.Log("("+this.id+") CHECKPOINT --> Chargement prochain module...");	
-			this.LoadModule(modulesList[position+1]);
-		}
+		
 	}
-	
-	
-	/* function used to lauch the next module */
-	public void LoadModule(string moduleId){
-		
-		Hashtable additionnalDataTable = new Hashtable();
-		additionnalDataTable.Add("lauchedGameModuleID", moduleId); // we add to the table the id off the module that we want to start
-		
-		Debug.Log("("+this.id+") CHECKPOINT --> chargement du module :" + moduleId);
-		
-		nsNotifCenter.postNotificationNameObjectUserInfo(moduleName,this,additionnalDataTable);
-	}
-	
-	public void CheckpointFinish(){
-		
-		// the ckeckpoint is no longer listening the gameModules
-		//nsNotifCenter.removeObserverNameObject(this, "QuestionResponseModule",null);
-		
-		Hashtable additionnalDataTable = new Hashtable();
-		additionnalDataTable.Add("finishedCheckpointID", id); // the finished checkpoint add  his ID to the dataTable
-		
-		Debug.Log("("+this.id+") CHECKPOINT --> notification de fin de checkpoint :" + id);
-		
-		Debug.Log("test 0");
-		
-		// the checkpoint send a ending notification to the game manager
-		nsNotifCenter.postNotificationNameObjectUserInfo(moduleName,this,additionnalDataTable);
-		Debug.Log("test 1");
-	} 
 	
 	/* destructor, remove the observer if destroyed */
 	~Checkpoint(){

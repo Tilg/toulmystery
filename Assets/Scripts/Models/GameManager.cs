@@ -24,9 +24,6 @@ public class GameManager : MonoBehaviour {
 	void Start() {
 		//the gameManager notify all checkpoint
 		nsNotifCenter.postNotificationNameObjectUserInfo(moduleName,this,null);
-				
-		// we lauch the first checkpoint
-		this.LoadCheckpoint(checkpointsIDList[0]);
 	}
 	
 	public void RecordCheckpoint(NSNotification aNotification){	
@@ -36,6 +33,12 @@ public class GameManager : MonoBehaviour {
 		Debug.Log("GAME MANAGER --> checkpoint enregistre : "  + newCheckpoint.id);	
 		
 		checkpointsList.Add(newCheckpoint);	
+		
+		// if ll te checkpoints are registered
+		if (checkpointsList.Count == checkpointsIDList.Length){
+			// we lauch the first checkpoint
+			this.LoadCheckpoint(checkpointsIDList[0]);
+		}
 	}
 	
 	public void LoadNextCheckpoint(string  finishedCheckpointID){		

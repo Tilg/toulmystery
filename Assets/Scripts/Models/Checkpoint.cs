@@ -62,7 +62,7 @@ public class Checkpoint : MonoBehaviour{
 		if (targetedCheckpointID == null){
 			targetedCheckpointID = modulesIDList[0];
 		}
-		
+	
 		foreach (QuestionResponseModule moduleX in gameModuleList){
 			if ( moduleX.id.Equals(targetedCheckpointID)){
 				moduleX.BeginModule(this);

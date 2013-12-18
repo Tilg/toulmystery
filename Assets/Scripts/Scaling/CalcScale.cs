@@ -15,34 +15,46 @@ public class CalcScale : MonoBehaviour
 	void Awake()
 	{		
 		// test
-		GameObject TestLocalisation = GameObject.Find ("TestLocalisation");
+		GameObject testLocalisation = GameObject.Find ("TestLocalisation");
 		
-		GameObject mapPoint3 = GameObject.Find ("MapPoint3");
-		GPSPoint gps3 = (GPSPoint) mapPoint3.GetComponent ("GPSPoint");
+		GameObject mapPoint2 = GameObject.Find ("MapPoint2");
+		GPSPoint gps2 = (GPSPoint) mapPoint2.GetComponent ("GPSPoint");
 		
 		GameObject mapPoint1 = GameObject.Find ("MapPoint1");
+		GPSPoint gps1 = (GPSPoint) mapPoint1.GetComponent ("GPSPoint");
 		
-		GameObject TestCamera = GameObject.Find ("TestCamera");
+		// GameObject TestCamera = GameObject.Find ("TestCamera");
 		
-		// Scale.rotateMap();
-		Scale.placeGameObjectAt(TestLocalisation,48.676755,5.890141);
-		Scale.placeGameObjectAt(TestCamera,48.676755,5.890141);
+		// Transpose.rotateMap();
+
 		
-		Vector3 v = Scale.fromLatLng2XZ(gps3.lat,gps3.lng);
-		Debug.Log (v);
+		// Vector2 v = Transpose.fromLatLng2XZ(gps3.lat,gps3.lng);
+		// Debug.Log (v);
 		
-		Vector3 delta1 = new Vector3(v.x - mapPoint1.transform.position.x, 0 ,  v.z - mapPoint1.transform.position.z);
-		Vector3 delta2 = new Vector3(mapPoint3.transform.position.x - mapPoint1.transform.position.x, 0 ,  mapPoint3.transform.position.z  - mapPoint1.transform.position.z);
+		// Transpose.fromXZ2LatLng(TestLocalisation.transform.position.x,TestLocalisation.transform.position.z);
 		
-        float angle1 = Mathf.Atan2(delta1.z, delta1.x) * Mathf.Rad2Deg;
-		Debug.Log (angle1);
+		Vector2 unityMp1Mp2 = new Vector2(mapPoint2.transform.position.x - mapPoint1.transform.position.x, mapPoint2.transform.position.z - mapPoint1.transform.position.z);
+		Vector2 gpsMp1Mp2= new Vector2(gps2.lng - gps1.lng, gps2.lat - gps1.lat);  
+		
+		float unityAngle = Mathf.Atan2(unityMp1Mp2.y, unityMp1Mp2.x);
+		float gpsAngle = Mathf.Atan2(gpsMp1Mp2.y, gpsMp1Mp2.x * Mathf.Cos(gps1.lat * Mathf.Deg2Rad)) ;
+		
+		float unityAngleDeg = unityAngle * Mathf.Rad2Deg;
+		float gpsAngleDeg = gpsAngle * Mathf.Rad2Deg;
+		
+		float angle = (unityAngleDeg - gpsAngleDeg);
+		
+		GameObject testCamera = GameObject.Find("TestCamera");
+		float yRotation = 360 - angle;
 		
 		
-		float angle2 = Mathf.Atan2(delta2.z, delta2.x) * Mathf.Rad2Deg;
-		Debug.Log (angle2);
-		// Scale.fromXZ2LatLng(TestLocalisation.transform.position.x,TestLocalisation.transform.position.z);
-		// Scale.(TestCamera, 48.677658,5.890704);
-		// end test	
+		Transpose.placeGameObjectAt(testLocalisation,48.676755,5.890141);
+		Transpose.placeGameObjectAt(testCamera,48.676755,5.890141);
+		
+		testCamera.transform.eulerAngles = new Vector3(90, yRotation, 0);
+
+		Debug.Log(yRotation);
+		
 	}
 	
 }

@@ -45,18 +45,19 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Dev only\Capture.cs" />
-     <Compile Include="Assets\Models\GPSPoint.cs" />
-     <Compile Include="Assets\Models\Scale.cs" />
      <Compile Include="Assets\Scripts\BTest.cs" />
      <Compile Include="Assets\Scripts\FPSFlyWalk.cs" />
      <Compile Include="Assets\Scripts\FPSMoveHead.cs" />
      <Compile Include="Assets\Scripts\FollowRoad.cs" />
+     <Compile Include="Assets\Scripts\GPSPoint.cs" />
      <Compile Include="Assets\Scripts\LinksController.cs" />
+     <Compile Include="Assets\Scripts\MapInitialisation.cs" />
      <Compile Include="Assets\Scripts\Menus\IlotButton.cs" />
      <Compile Include="Assets\Scripts\Menus\Menu.cs" />
      <Compile Include="Assets\Scripts\MouseClic.cs" />
      <Compile Include="Assets\Scripts\Roll over\RollOver.cs" />
      <Compile Include="Assets\Scripts\Scaling\CalcScale.cs" />
+     <Compile Include="Assets\Scripts\Transpose.cs" />
      <None Include="Assets\Terrain items\zone1_vegCours.txt" />
      <None Include="Assets\Terrain items\zone1_vegRamparts.txt" />
      <None Include="Assets\Terrain items\zone2_vegetation.txt" />

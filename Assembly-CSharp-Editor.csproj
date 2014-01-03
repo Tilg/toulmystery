@@ -5,20 +5,21 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{967E8960-83B8-CD31-C0D1-2212634FDF5C}</ProjectGuid>
+	<ProjectGuid>{AF64AB32-E7A2-8225-D17F-10AC67FDFF5C}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
 	<AssemblyName>Assembly-CSharp-Editor</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 	<DebugSymbols>true</DebugSymbols>
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_3_5_7;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_WIN;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_2;UNITY_4_3;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_DUCK_TYPING</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -36,16 +37,18 @@
 	<Reference Include="System" />
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Dev only\Editor\CaptureView.cs" />
      <Compile Include="Assets\Editor\ATest.cs" />
+     <Compile Include="Assets\Editor\EditorGPSPoint.cs" />
      <Compile Include="Assets\Editor\Fences.cs" />
      <Compile Include="Assets\Editor\GenerateTerrainHeights.cs" />
      <Compile Include="Assets\Editor\IlotButtonEditor.cs" />
@@ -61,14 +64,32 @@
      <None Include="Assets\Terrain items\zone2_vigne.txt" />
      <None Include="Assets\Scripts\Menus\ilotbuttonparams.txt" />
      <None Include="Assets\Scripts\Roll over\displayedStrings.txt" />
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\iPhonePlayer\EditorExtensions\UnityEditor.iOS.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.WP8.Extensions">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\WP8Support\EditorExtensions\UnityEditor.WP8.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Metro.Extensions">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\MetroSupport\EditorExtensions\UnityEditor.Metro.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.BB10.Extensions">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\BB10Player\EditorExtensions\UnityEditor.BB10.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Android.Extensions">
+ <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{63E89979-2575-5D03-31A7-1204BDD6F732}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{909CD52A-B822-757B-8755-D9D91E973238}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{BCA346DE-6319-7047-6461-7BDFFF687DE8}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+      <Project>{42C86EAC-802B-9511-B245-47F2F07E13E5}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{8899CA71-F720-2BA6-CD02-D4BAF9B7B922}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{CA0B57D2-8A77-4E49-FFC6-1FC441858CB0}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

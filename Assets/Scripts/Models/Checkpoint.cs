@@ -26,7 +26,7 @@ public class Checkpoint : MonoBehaviour{
 		
 		//The checkpoint are know listening for the starting notification comming from GameManager
 		nsNotifCenter.addObserverSelectorNameObject(this,this.RecordGameManager,"GameManager",null);
-		nsNotifCenter.addObserverSelectorNameObject(this,this.RecordModule,"QuestionResponseModule",null);
+		nsNotifCenter.addObserverSelectorNameObject(this,this.RecordModule,"GameModule",null);
 	}
 	
 	void Start(){
@@ -63,7 +63,7 @@ public class Checkpoint : MonoBehaviour{
 			targetedCheckpointID = modulesIDList[0];
 		}
 	
-		foreach (QuestionResponseModule moduleX in gameModuleList){
+		foreach (GameModule moduleX in gameModuleList){
 			if ( moduleX.id.Equals(targetedCheckpointID)){
 				moduleX.BeginModule(this);
 			}

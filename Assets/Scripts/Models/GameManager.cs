@@ -29,9 +29,7 @@ public class GameManager : MonoBehaviour {
 	public void RecordCheckpoint(NSNotification aNotification){	
 		
 		Checkpoint newCheckpoint =  (Checkpoint)aNotification.obj ;
-		
-		Debug.Log("GAME MANAGER --> checkpoint enregistre : "  + newCheckpoint.id);	
-		
+
 		checkpointsList.Add(newCheckpoint);	
 		
 		// if ll te checkpoints are registered
@@ -61,15 +59,8 @@ public class GameManager : MonoBehaviour {
 	/* fonction used to lauch a request to checkpoint with the id of the checkpoint that we want to lauch */
 	public void LoadCheckpoint(string nextCheckpointID){
 	
-		Debug.Log("GAME MANAGER --> taille liste checkpoint : "+ checkpointsList.Count);
-		
 		foreach (Checkpoint checkpointX in checkpointsList){
-			
-			Debug.Log("GAME MANAGER --> id checkpoint : "+ checkpointX.id);
-			Debug.Log("GAME MANAGER --> id checkpoint attendu : "+ nextCheckpointID);
-			
-			if ( checkpointX.id.Equals(nextCheckpointID)){
-				Debug.Log("GAME MANAGER --> load checkpoint : "+ checkpointsIDList[0]);	
+			if ( checkpointX.id.Equals(nextCheckpointID)){	
 				checkpointX.Lauch(null);
 			}
 		}

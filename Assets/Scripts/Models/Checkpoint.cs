@@ -5,9 +5,9 @@ using NotificationCenter;
 public class Checkpoint : MonoBehaviour{
 	
 	public string id; // checkpointID
-	public double latitude;
-	public double longitude;
-	public float range; // this range is used to lauch the checkpoint if the user is closed enought of his latitude and longitude
+	public float latitude;
+	public float longitude;
+	public float rangeInMeters; // this range is used to lauch the checkpoint if the user is closed enought of his latitude and longitude
 	public string[] modulesIDList; //list of all the ID of the modules who composed this checkpoint
 	
 	private GameManager gameManager = null;

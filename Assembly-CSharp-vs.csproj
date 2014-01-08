@@ -12,13 +12,14 @@
 	<AssemblyName>Assembly-CSharp</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 	<DebugSymbols>true</DebugSymbols>
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_3_5_7;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_WIN;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_2;UNITY_4_3;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -36,6 +37,7 @@
 	<Reference Include="System" />
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
 	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
 	</Reference>
@@ -44,20 +46,33 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BTest.cs" />
      <Compile Include="Assets\Dev only\Capture.cs" />
-     <Compile Include="Assets\Scripts\BTest.cs" />
      <Compile Include="Assets\Scripts\FPSFlyWalk.cs" />
      <Compile Include="Assets\Scripts\FPSMoveHead.cs" />
      <Compile Include="Assets\Scripts\FollowRoad.cs" />
-     <Compile Include="Assets\Scripts\GPSPoint.cs" />
      <Compile Include="Assets\Scripts\LinksController.cs" />
-     <Compile Include="Assets\Scripts\MapInitialisation.cs" />
      <Compile Include="Assets\Scripts\Menus\IlotButton.cs" />
      <Compile Include="Assets\Scripts\Menus\Menu.cs" />
+     <Compile Include="Assets\Scripts\Models\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\Models\GPSPoint.cs" />
+     <Compile Include="Assets\Scripts\Models\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Models\GameModule\CrosswordModule.cs" />
+     <Compile Include="Assets\Scripts\Models\GameModule\GameModule.cs" />
+     <Compile Include="Assets\Scripts\Models\GameModule\HelpAndExplainationModule.cs" />
+     <Compile Include="Assets\Scripts\Models\GameModule\MultipleChoiceQuestionModule.cs" />
+     <Compile Include="Assets\Scripts\Models\GameModule\QuestionResponseModule.cs" />
+     <Compile Include="Assets\Scripts\Models\GameModule\Word.cs" />
+     <Compile Include="Assets\Scripts\Models\InformationSheet.cs" />
+     <Compile Include="Assets\Scripts\Models\MapInitialisation.cs" />
+     <Compile Include="Assets\Scripts\Models\PlayerInitialisation.cs" />
+     <Compile Include="Assets\Scripts\Models\Transpose.cs" />
+     <Compile Include="Assets\Scripts\Models\constants.cs" />
+     <Compile Include="Assets\Scripts\Models\observable.cs" />
+     <Compile Include="Assets\Scripts\Models\observer.cs" />
      <Compile Include="Assets\Scripts\MouseClic.cs" />
+     <Compile Include="Assets\Scripts\NSNotificationCenter.cs" />
      <Compile Include="Assets\Scripts\Roll over\RollOver.cs" />
-     <Compile Include="Assets\Scripts\Scaling\CalcScale.cs" />
-     <Compile Include="Assets\Scripts\Transpose.cs" />
      <None Include="Assets\Terrain items\zone1_vegCours.txt" />
      <None Include="Assets\Terrain items\zone1_vegRamparts.txt" />
      <None Include="Assets\Terrain items\zone2_vegetation.txt" />

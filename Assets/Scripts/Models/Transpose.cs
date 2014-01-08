@@ -5,7 +5,7 @@ public static class Transpose
 {
 	
 	
-	// Returns distance between 2 point (with a given lat and lng for each point)
+	// Returns distance between 2 point (with a given lat and lng for each point) in kilometers
 	public static float getDistWorld (float latA, float lngA, float latB, float lngB)
 	{
 		double _eQuatorialEarthRadius = 6378.1370D;

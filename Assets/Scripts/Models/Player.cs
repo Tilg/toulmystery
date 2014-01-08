@@ -43,6 +43,16 @@ public class Player : MonoBehaviour {
 		// Player position in reality is transposed on the map in unity 
 		Transpose.placeGameObjectAt(goPlayer, coords.x, coords.y);
 	}
+
+	void OnGUI () {
+		// Make a background box
+		GUI.Box(new Rect(10,10,150,90), "Position Actuelle");
+
+		// Display Lat and Longitude
+		GUI.Label(new Rect(20, 40, 100, 20), "Latitude:" + this.getPosLat());
+		GUI.Label(new Rect(20, 70, 100, 20), "Longitude:" + this.getPosLng());
+	}
+
 	
 	// Use this for initialization
 	void Start () {

@@ -60,12 +60,12 @@ public class Player : MonoBehaviour {
 	}
 
 	// returns the player position (latitude) 	
-	public float getPoslat(){
+	public float getPosLat(){
 		return coords.x;
 	}
 
 	// returns the player position (longitude)
-	public float getPoslng(){
+	public float getPosLng(){
 		return coords.y;
 	}
 

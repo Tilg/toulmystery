@@ -65,7 +65,7 @@
      <Compile Include="Assets\Scripts\Models\GameModule\Word.cs" />
      <Compile Include="Assets\Scripts\Models\InformationSheet.cs" />
      <Compile Include="Assets\Scripts\Models\MapInitialisation.cs" />
-     <Compile Include="Assets\Scripts\Models\PlayerInitialisation.cs" />
+     <Compile Include="Assets\Scripts\Models\Player.cs" />
      <Compile Include="Assets\Scripts\Models\Transpose.cs" />
      <Compile Include="Assets\Scripts\Models\constants.cs" />
      <Compile Include="Assets\Scripts\Models\observable.cs" />

@@ -36,7 +36,7 @@ public class MapInitialisation : MonoBehaviour {
 		GameObject racine = GameObject.Find("Racine");
 		float newAngle = racine.transform.eulerAngles.y + getRotationAngleDeg();
 		
-		Debug.Log("Rotation map:" + newAngle );
+		//Debug.Log("Rotation map:" + newAngle );
 		racine.transform.eulerAngles = new Vector3(0, newAngle,0);
 
 	

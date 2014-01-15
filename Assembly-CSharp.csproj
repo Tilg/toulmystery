@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Menus\IlotButton.cs" />
      <Compile Include="Assets\Scripts\Menus\Menu.cs" />
      <Compile Include="Assets\Scripts\Models\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\Models\GPSManager.cs" />
      <Compile Include="Assets\Scripts\Models\GPSPoint.cs" />
      <Compile Include="Assets\Scripts\Models\GameManager.cs" />
      <Compile Include="Assets\Scripts\Models\GameModule\CrosswordModule.cs" />

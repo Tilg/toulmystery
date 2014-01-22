@@ -62,6 +62,14 @@ public abstract class GameModule : MonoBehaviour{
 		currentCheckpoint.FindNextModule(this.id);
 	}
 
+	public void setId( string idParam){
+		this.id = idParam;
+	}
+
+	public void setTitle(string titleParam){
+		this.title = titleParam;
+	}
+
 	/* destructor, remove the observer if destroyed */
 	~GameModule(){
 		NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;

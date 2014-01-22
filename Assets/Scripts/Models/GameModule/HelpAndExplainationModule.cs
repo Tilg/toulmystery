@@ -10,8 +10,7 @@ public class HelpAndExplainationModule : GameModule{
 
 	void Awake () {
 
-		string texture = "Assets/Resources/Textures/" + nomFeuilleInfo + ".png";
-		myGUITexture = (Texture2D)Resources.LoadAssetAtPath(texture, typeof(Texture2D));
+		setMyGUITexture(nomFeuilleInfo);
 	}
 
 	// fonction used to construct the GUI
@@ -41,6 +40,11 @@ public class HelpAndExplainationModule : GameModule{
 			
 			GUI.EndGroup ();
 		}
+	}
+
+	public void setMyGUITexture(string nomFeuilleInfoParam){
+		string texture = "Assets/Resources/Textures/" + nomFeuilleInfoParam + ".png";
+		myGUITexture = (Texture2D)Resources.LoadAssetAtPath(texture, typeof(Texture2D));
 	}
 
 }

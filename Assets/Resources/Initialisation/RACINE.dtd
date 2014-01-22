@@ -1,0 +1,39 @@
+<!DOCTYPE RACINE [
+
+<!ELEMENT RACINE (MAPPOINTS,TRAJET)>
+	<!ELEMENT MAPPOINTS (MAPPOINT,MAPPOINT)>
+		<!ELEMENT MAPPOINT ()>
+			<!ATTLIST latitude type CDATA REQUIRED>
+			<!ATTLIST longitude type CDATA REQUIRED>
+
+	<!ELEMENT TRAJET (CHECKPOINT*)>
+		<!ELEMENT CHECKPOINT (GAMEMODULE*)>
+			<!ATTLIST idCheckpoint type ID REQUIRED>
+			<!ATTLIST latitude type CDATA REQUIRED>
+			<!ATTLIST longitude type CDATA REQUIRED>
+			<!ATTLIST range type CDATA REQUIRED>
+
+			<!ELEMENT GAMEMODULE (HelpAndExplainationModule|MiltipleChoiceQuestionModule|QuestionResponseModule)>
+
+				<!ATTLIST id type ID REQUIRED>
+				<!ATTLIST title type CDATA REQUIRED>
+				<!-- we specify the different types of game module -->
+
+				<!-- HelpAndExplainationModule -->
+				<!ELEMENT HelpAndExplainationModule>
+					<!ATTLIST sheetPath type CDATA REQUIRED>
+
+				<!-- MiltipleChoiceQuestionModule -->
+				<!ELEMENT MultipleChoiceQuestionModule (RESPONSE*)>
+					<!ATTLIST question type CDATA REQUIRED>
+					<!ATTLIST responseType type (text|image) REQUIRED>
+					<!ATTLIST correctAnswerNumber type CDATA REQUIRED>
+					<!ELEMENT RESPONSE ()>
+						<!ATTLIST answer type CDATA REQUIRED>
+
+				<!-- QuestionResponseModule -->
+				<!ELEMENT QuestionResponseModule (QuestionBlock*)>
+					<!ELEMENT QuestionBlock ()>
+						<!ATTLIST question type CDATA REQUIRED>
+						<!ATTLIST correctAnswer type CDATA REQUIRED>
+]>

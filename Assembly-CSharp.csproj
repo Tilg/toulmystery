@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Models\GameModule\QuestionResponseModule.cs" />
      <Compile Include="Assets\Scripts\Models\GameModule\Word.cs" />
      <Compile Include="Assets\Scripts\Models\InformationSheet.cs" />
+     <Compile Include="Assets\Scripts\Models\InitTrajetXML.cs" />
      <Compile Include="Assets\Scripts\Models\MapInitialisation.cs" />
      <Compile Include="Assets\Scripts\Models\Player.cs" />
      <Compile Include="Assets\Scripts\Models\Transpose.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\Scripts\NSNotificationCenter.cs" />
      <Compile Include="Assets\Scripts\Roll over\RollOver.cs" />
      <None Include="Assets\Terrain items\zone1_vegCours.txt" />
+     <None Include="Assets\Resources\Initialisation\trajet1.xml" />
      <None Include="Assets\Terrain items\zone1_vegRamparts.txt" />
      <None Include="Assets\Terrain items\zone2_vegetation.txt" />
      <None Include="Assets\Terrain items\zone2_haies.txt" />

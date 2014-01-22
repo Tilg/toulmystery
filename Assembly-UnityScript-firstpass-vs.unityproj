@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Standard Assets\Scripts\FPSWalker.js" />
      <None Include="Assets\Terrain items\zone1_vegCours.txt" />
+     <None Include="Assets\Resources\Initialisation\trajet1.xml" />
      <None Include="Assets\Terrain items\zone1_vegRamparts.txt" />
      <None Include="Assets\Terrain items\zone2_vegetation.txt" />
      <None Include="Assets\Terrain items\zone2_haies.txt" />

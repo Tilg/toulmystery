@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--DOCTYPE RACINE SYSTEM "RACINE.dtd"-->
+
+<RACINE>
+	<!--MAPPOINTS>
+		<MAPPoint latitude="48.67484" longitude="5.889817" />
+		<MAPPoint latitude="48.67887" longitude="5.891998" />
+	</MAPPOINTS-->
+
+	<TRAJET>
+		<CHECKPOINT id="checkpoint1" latitude="48.675682" longitude="5.888672" range="10">
+			<GAMEMODULE idGameModule="module1" title="mon module 1">
+				<HelpAndExplainationModule sheetPath="feuille1"/>
+			</GAMEMODULE>
+		</CHECKPOINT>
+		<CHECKPOINT id="checkpoint2" latitude="50" longitude="5" range="100">
+			<GAMEMODULE idGameModule="module2" title="mon module 2">
+				<HelpAndExplainationModule sheetPath="feuille2"/>
+			</GAMEMODULE>
+		</CHECKPOINT>
+	</TRAJET>
+</RACINE>

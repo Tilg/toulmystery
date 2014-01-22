@@ -10,21 +10,24 @@ public class GameManager : MonoBehaviour {
 	private string moduleName = "GameManager";
 	private NSNotificationCenter nsNotifCenter = NSNotificationCenter.defaultCenter;
 	private Hashtable additionnalDataTable;
-	private ArrayList checkpointsList;
+	private ArrayList checkpointsList= new ArrayList();
 
-	private ArrayList availabeCheckpointsList;
+	private ArrayList availabeCheckpointsList= new ArrayList();
 	private Player player;
 
 	private bool playerIsPlaying = false;
+	public string initialisationXMLFile ="";
 	
 	/* Used to initiate the link between objetct with observer/observable pattern */
 	void Awake() {
 		
-		checkpointsList = new ArrayList();
-		availabeCheckpointsList = new ArrayList();
-
-		//The GameManager listen the checkpoint
-		nsNotifCenter.addObserverSelectorNameObject(this,this.RecordCheckpoint,"CheckpointModule",null);
+		/** if the user chose to initialize the Trajet with an xml file **/
+		if (initialisationXMLFile != ""){
+			LoadFromXML();
+		}else{
+			//The GameManager listen the checkpoint
+			nsNotifCenter.addObserverSelectorNameObject(this,this.RecordCheckpoint,"CheckpointModule",null);
+		}
 
 		// The GameManager listen the player
 		nsNotifCenter.addObserverSelectorNameObject(this,this.RecordPlayer,"player",null);
@@ -130,7 +133,6 @@ public class GameManager : MonoBehaviour {
 							}
 						}
 					}
-
 					LoadCheckpoint(selectedCheckpoint);
 				}
 			}
@@ -141,6 +143,22 @@ public class GameManager : MonoBehaviour {
 		if ( ! playerIsPlaying ){ //if the player is not playing, we check if he is near to an active checkpoint 
 			checkForAvailableCheckpoint( player.getPosLat(), player.getPosLng() );
 		}
+	}
+
+	public void LoadFromXML(){
+		InitTrajetXML.LoadXML(this);	
+	}
+
+	public string GetInitialisationXMLFile(){
+		return initialisationXMLFile;
+	}
+	
+	public ArrayList GetCheckpointsList(){
+		return checkpointsList;
+	}
+	
+	public void SetCheckpointsList(ArrayList listeCheckpoint){
+		checkpointsList = listeCheckpoint;
 	}
 
 

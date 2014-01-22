@@ -3,8 +3,12 @@ using System.Collections;
 
 public class ChangeView : MonoBehaviour {
 
-	private bool fpsView = true;
-	
+	public bool fpsView {get; set;} // Getter and Setter C# Style 
+
+	void Awake(){
+		fpsView = true;
+	}
+
 	public void change2FPSView(){
 
 		// Set camera projection to perspective
@@ -42,12 +46,4 @@ public class ChangeView : MonoBehaviour {
 		Debug.Log("FPS VIEW [" + fpsView + "]");
 		Debug.Log("SWITCH TO SKYVIEW - DONE");
 	}
-	
-	void OnGUI() {
-		if (GUI.Button(new Rect(315, 10, 65, 30), "Camera"))
-			if (fpsView)
-				change2SkyView();
-			else
-				change2FPSView();
-	}	
 }

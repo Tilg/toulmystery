@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\LinksController.cs" />
      <Compile Include="Assets\Scripts\Menus\IlotButton.cs" />
      <Compile Include="Assets\Scripts\Menus\Menu.cs" />
+     <Compile Include="Assets\Scripts\Models\ChangeView.cs" />
      <Compile Include="Assets\Scripts\Models\Checkpoint.cs" />
      <Compile Include="Assets\Scripts\Models\GPSManager.cs" />
      <Compile Include="Assets\Scripts\Models\GPSPoint.cs" />
@@ -63,6 +64,7 @@
      <Compile Include="Assets\Scripts\Models\GameModule\HelpAndExplainationModule.cs" />
      <Compile Include="Assets\Scripts\Models\GameModule\MultipleChoiceQuestionModule.cs" />
      <Compile Include="Assets\Scripts\Models\GameModule\QuestionResponseModule.cs" />
+     <Compile Include="Assets\Scripts\Models\GameModule\SwitchViewModule.cs" />
      <Compile Include="Assets\Scripts\Models\GameModule\Word.cs" />
      <Compile Include="Assets\Scripts\Models\InformationSheet.cs" />
      <Compile Include="Assets\Scripts\Models\MapInitialisation.cs" />
@@ -75,6 +77,7 @@
      <Compile Include="Assets\Scripts\NSNotificationCenter.cs" />
      <Compile Include="Assets\Scripts\Roll over\RollOver.cs" />
      <None Include="Assets\Terrain items\zone1_vegCours.txt" />
+     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Terrain items\zone1_vegRamparts.txt" />
      <None Include="Assets\Terrain items\zone2_vegetation.txt" />
      <None Include="Assets\Terrain items\zone2_haies.txt" />

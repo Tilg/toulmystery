@@ -54,15 +54,15 @@ public class GPSManager : MonoBehaviour {
 
 	void updateDevicePosition(){
 
-		GameObject goPlayer = GameObject.Find ("Player");
-		Player player = (Player)goPlayer.GetComponent("Player");
+		// GameObject goPlayer = GameObject.Find ("Player");
+		// Player player = (Player)goPlayer.GetComponent("Player");
 
 		// update player position data
-		player.setPosLat(this.currentLat);
-		player.setPosLat(this.currentLng);
+		// player.setPosLat(this.currentLat);
+		// player.setPosLat(this.currentLng);
 
 		// Player position in reality is transposed on the map in unity 
-		Transpose.placeGameObjectAt(goPlayer, this.currentLat, this.currentLng);
+		// Transpose.placeGameObjectAt(goPlayer, this.currentLat, this.currentLng);
 	}
 
 

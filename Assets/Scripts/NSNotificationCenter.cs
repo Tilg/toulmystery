@@ -184,16 +184,14 @@ namespace NotificationCenter {
 		public void postNotificationNameObjectUserInfo (String notificationName, System.Object notificationSender, Hashtable userInfo)  {
 			lock (objectLock) {  // ensure code is reentrant
 				
-				Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName+")test postNotificationNameObjectUserInfo 1");
+				//Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName);
+
 				List<ObserverSelectorSender> list = (List<ObserverSelectorSender>)dict[notificationName];
-				Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName+")test postNotificationNameObjectUserInfo 2");
 				if(list!=null) {
 					NSNotification not = NSNotification.notificationWithNameObjectUserInfo(notificationName, notificationSender, userInfo); 
-					Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName+")test postNotificationNameObjectUserInfo 3");
 					foreach (ObserverSelectorSender os in list) {
-						Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName+")test postNotificationNameObjectUserInfo 4");
+
 						if ((os.sender==null) || (os.sender==notificationSender)){
-							Console.WriteLine("("+ notificationSender.ToString() +" "+notificationName+"test postNotificationNameObjectUserInfo 5");
 							os.selector(not);
 						}
 					}

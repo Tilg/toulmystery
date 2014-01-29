@@ -61,7 +61,8 @@ public class Checkpoint : MonoBehaviour{
 	public void RecordGameManager(NSNotification aNotification) {	
 		gameManager = (GameManager) aNotification.obj;
 	}
-	
+
+
 	/* Used to know the reference of the gameModule of this checkpoint */
 	public void RecordModule(NSNotification aNotification){	
 		GameModule newGameModule =  (GameModule) aNotification.obj ;
@@ -74,7 +75,8 @@ public class Checkpoint : MonoBehaviour{
 			}
 		}		
 	}
-	
+
+
 	/* this method is called by the game manager and allow to start a checkpoint */
 	public void Lauch(string targetedCheckpointID){
 		

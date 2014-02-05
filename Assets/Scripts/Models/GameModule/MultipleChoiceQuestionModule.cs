@@ -48,33 +48,48 @@ public class MultipleChoiceQuestionModule : GameModule {
 		
 		if (display){
 			
-			GUI.BeginGroup (new Rect (Screen.width / 2 - constants.FRAME_FOR_GAME_WIDTH/2,
-			                          Screen.height / 2 - constants.FRAME_FOR_GAME_HEIGHT/2,
-			                          constants.FRAME_FOR_GAME_WIDTH,
-			                          constants.FRAME_FOR_GAME_HEIGHT));
+			GUI.BeginGroup (new Rect ((Screen.width / 2 - constants.FRAME_FOR_GAME_WIDTH/2) * DeviceHandler.multiplicator,
+			                          (Screen.height / 2 - constants.FRAME_FOR_GAME_HEIGHT/2) * DeviceHandler.multiplicator,
+			                          constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
+			                          constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator));
 			
 			/********************* Title of the box **************************/ 
 			
 			// Make a background box
-			GUI.Box(new Rect(0,0,constants.FRAME_FOR_GAME_WIDTH,constants.FRAME_FOR_GAME_HEIGHT), title);
+			GUI.Box(new Rect(0 * DeviceHandler.multiplicator,
+			                 0 * DeviceHandler.multiplicator,
+			                 constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
+			                 constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator), title);
 
 
 			/********************* question **************************/ 
 
-			GUI.Label(new Rect (25, 30,  constants.LABEL_WIDTH, constants.LABEL_HEIGHT), question);
+			GUI.Label(new Rect (25 * DeviceHandler.multiplicator,
+			                    30 * DeviceHandler.multiplicator,
+			                    constants.LABEL_WIDTH * DeviceHandler.multiplicator,
+			                    constants.LABEL_HEIGHT * DeviceHandler.multiplicator), question);
 
 			/********************* answer list **************************/ 
 
 			if (responseType.Equals (typeDeReponse.image)) {
-				selectedElement = GUI.SelectionGrid(new Rect(25, 90, constants.QCM_CHOICE_WIDTH, constants.QCM_CHOICE_HEIGHT), selectedElement, possibleImageResponse, numberOfElementInALine);
+				selectedElement = GUI.SelectionGrid(new Rect(25 * DeviceHandler.multiplicator,
+				                                             90 * DeviceHandler.multiplicator,
+				                                             constants.QCM_CHOICE_WIDTH * DeviceHandler.multiplicator,
+				                                             constants.QCM_CHOICE_HEIGHT * DeviceHandler.multiplicator), selectedElement, possibleImageResponse, numberOfElementInALine);
 			}else{
-				selectedElement = GUI.SelectionGrid(new Rect(25, 90, constants.QCM_CHOICE_WIDTH, constants.QCM_CHOICE_HEIGHT), selectedElement, listeReponsesPossibles, numberOfElementInALine);
+				selectedElement = GUI.SelectionGrid(new Rect(25 * DeviceHandler.multiplicator,
+				                                             90 * DeviceHandler.multiplicator,
+				                                             constants.QCM_CHOICE_WIDTH * DeviceHandler.multiplicator,
+				                                             constants.QCM_CHOICE_HEIGHT * DeviceHandler.multiplicator), selectedElement, listeReponsesPossibles, numberOfElementInALine);
 			}
 
 
 			/********************* next button **************************/ 
 			
-			if (GUI.Button (new Rect (25, 260, constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT), "Valider")) {
+			if (GUI.Button (new Rect (25 * DeviceHandler.multiplicator,
+			                          260 * DeviceHandler.multiplicator,
+			                          constants.BUTTON_WIDTH * DeviceHandler.multiplicator,
+			                          constants.BUTTON_HEIGHT * DeviceHandler.multiplicator), "Valider")) {
 				if ( selectedElement == numeroElementCorrect ){
 					this.FinishModule();
 				}

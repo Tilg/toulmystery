@@ -43,7 +43,7 @@ public class GPSManager : MonoBehaviour {
 		}
 		else {
 			// Get the last known position
-			Debug.Log("Echec lors de l'activation du GPS.");
+			//Debug.Log("Echec lors de l'activation du GPS.");
 		}
 		#endif  
 	}
@@ -83,13 +83,6 @@ public class GPSManager : MonoBehaviour {
 			Transpose.placeGameObjectAt(goPlayer, this.player.getPosLat(), this.player.getPosLng());
 
 		}
-
-		//update player position data
-		//player.setPosLat(currentGPSPosition.latitude);
-		//player.setPosLng(currentGPSPosition.longitude);
-		
-		//Player position in reality is transposed on the map in unity 
-		//Transpose.placeGameObjectAt(goPlayer, this.player.getPosLat(), this.player.getPosLng());
 	}
 
 

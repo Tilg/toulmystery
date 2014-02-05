@@ -6,7 +6,7 @@ public class ChangeView : MonoBehaviour {
 	public bool fpsView {get; set;} // Getter and Setter C# Style 
 
 	void Awake(){
-		fpsView = true;
+		fpsView = false;
 	}
 
 	public void change2FPSView(){
@@ -25,7 +25,7 @@ public class ChangeView : MonoBehaviour {
 
 		this.fpsView = true;
 
-		Debug.Log("SWITCH TO FPSVIEW - DONE");
+		//Debug.Log("SWITCH TO FPSVIEW - DONE");
 	}
 	
 	public void change2SkyView(){
@@ -43,7 +43,7 @@ public class ChangeView : MonoBehaviour {
 		transform.eulerAngles = eulerAngles;
 
 		this.fpsView = false;
-		Debug.Log("FPS VIEW [" + fpsView + "]");
-		Debug.Log("SWITCH TO SKYVIEW - DONE");
+		//Debug.Log("FPS VIEW [" + fpsView + "]");
+		//Debug.Log("SWITCH TO SKYVIEW - DONE");
 	}
 }

@@ -77,17 +77,16 @@ public class Checkpoint : MonoBehaviour{
 	}
 
 
-	/* this method is called by the game manager and allow to start a checkpoint */
-	public void Lauch(string targetedCheckpointID){
+	/* this method is called to start a checkpoint */
+	public void Lauch(string targetedModuleID){
+		 
 
-		Debug.Log( "le checkpoint : "+this.id +" se lance"); 
-
-		if (targetedCheckpointID == null){
-			targetedCheckpointID = modulesIDList[0];
+		if (targetedModuleID == null){
+			targetedModuleID = modulesIDList[0];
 		}
-	
+
 		foreach (GameModule moduleX in gameModuleList){
-			if ( moduleX.id.Equals(targetedCheckpointID)){
+			if ( moduleX.id.Equals(targetedModuleID)){
 				moduleX.BeginModule(this);
 			}
 		}

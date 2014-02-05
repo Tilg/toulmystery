@@ -38,8 +38,6 @@ public class GameManager : MonoBehaviour {
 
 	public void UpdateGpsData(NSNotification aNotification){
 
-		Debug.Log("GAME MANAGER --> notification changement coordonnée gps recues");	
-		Debug.Log("GAME MANAGER --> etat de playerIsPlaying : "+playerIsPlaying);
 		if ( ! playerIsPlaying ){ //if the player is not playing, we check if he is near to an active checkpoint 
 
 			Hashtable additionnalDataTable = aNotification.userInfo;
@@ -63,6 +61,8 @@ public class GameManager : MonoBehaviour {
 		if (checkpointsList.Count == checkpointsIDList.Length){
 			// we lauch the first checkpoint
 
+			Debug.Log("Tous les checkpoints ont fini de s'enregistrer");
+
 			foreach (Checkpoint checkpointX in checkpointsList){
 
 				if ( checkpointX.id.Equals(checkpointsIDList[0])){	
@@ -72,33 +72,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void LoadNextCheckpoint(string  finishedCheckpointID){		
-			
-		playerIsPlaying = false; //the function is called by a finised checkpoint so the player is available 
 
-		for (int i=0; i< availabeCheckpointsList.Count; i++){// we look for the position in the checkpointlist of the finished checkpoint
-
-			Checkpoint tmp = (Checkpoint) availabeCheckpointsList[i];
-
-			if ( finishedCheckpointID.Equals(tmp.id)){
-				availabeCheckpointsList.Remove(tmp);
-			}
-		}
-
-		int position = 0;
-		
-		for (int i=0; i< checkpointsIDList.Length; i++){// we look for the position in the checkpointlist of the finished checkpoint
-			if ( checkpointsIDList[i].Equals(finishedCheckpointID)){
-				position =i;
-			}
-		} 
-		
-		if (position != (checkpointsIDList.Length - 1)){// if the finished checkpoint was not the last checkpoint of this game, we lauch the next checkpoint
-			this.ActiveCheckpoint(checkpointsIDList[position+1]);
-		}
-		else
-			Debug.Log("GAME MANAGER --> le jeu est termine !");	
-	}
 	
 	/* fonction used to lauch a request to checkpoint with the id of the checkpoint that we want to lauch */
 	public void ActiveCheckpoint(string nextCheckpointID){
@@ -110,28 +84,29 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	/* fonction used to lauch a request to checkpoint with the id of the checkpoint that we want to lauch */
-	public void LoadCheckpoint(Checkpoint nextCheckpoint){
-		playerIsPlaying = true;
-		nextCheckpoint.Lauch(null);
-	}
-
 
 	public void CheckForAvailableCheckpoint( float latitudeParam, float longitudeParam){
 
-		ArrayList availableAndInRangeCheckpointsList = new ArrayList();
+		Debug.Log("Recherche de checkpoint disponible");
 
+		Debug.Log("nombre de checkponit disponible : "+ availabeCheckpointsList.Count);
+
+		ArrayList availableAndInRangeCheckpointsList = new ArrayList();
 
 		foreach (Checkpoint checkpointX in availabeCheckpointsList){
 
 			//we are calculating the distance between the coordonates of the player and the coordonates of the checkpointX
 			float distanceBetweenPlayerAndCheckpoint = (Transpose.getDistWorld(latitudeParam,longitudeParam,checkpointX.latitude,checkpointX.longitude)*1000f); // getDistworld return a result in kilometers, *1000 to have the result in meters
 
+			Debug.Log("distance entre le checkpoint "+checkpointX.id +" et le joueur : "+ distanceBetweenPlayerAndCheckpoint);
+
 			//if the distance is in the activation area of the checkpoint
 			if ( distanceBetweenPlayerAndCheckpoint <= checkpointX.rangeInMeters ){
 				availableAndInRangeCheckpointsList.Add(checkpointX);
 			} 
 		}
+
+		Debug.Log("nombre de checkponit disponible et a porté du joueur : "+ availableAndInRangeCheckpointsList.Count );
 
 		if (availableAndInRangeCheckpointsList.Count > 0){ // if a checkpoint can be lauch
 			
@@ -153,11 +128,48 @@ public class GameManager : MonoBehaviour {
 						}
 					}
 				}
-				
+
+				// we lauch the checkpoint
 				LoadCheckpoint(selectedCheckpoint);
 			}
 		}
 	}
+
+
+	/* fonction used to lauch a request to checkpoint with the id of the checkpoint that we want to lauch */
+	public void LoadCheckpoint(Checkpoint nextCheckpoint){
+		playerIsPlaying = true;
+		nextCheckpoint.Lauch(null);
+	}
+
+	public void LoadNextCheckpoint(string  finishedCheckpointID){		
+		
+		playerIsPlaying = false; //the function is called by a finised checkpoint so the player is available 
+		
+		for (int i=0; i< availabeCheckpointsList.Count; i++){// we look for the position in the checkpointlist of the finished checkpoint
+			
+			Checkpoint tmp = (Checkpoint) availabeCheckpointsList[i];
+			
+			if ( finishedCheckpointID.Equals(tmp.id)){
+				availabeCheckpointsList.Remove(tmp);
+			}
+		}
+		
+		int position = 0;
+		
+		for (int i=0; i< checkpointsIDList.Length; i++){// we look for the position in the checkpointlist of the finished checkpoint
+			if ( checkpointsIDList[i].Equals(finishedCheckpointID)){
+				position =i;
+			}
+		} 
+		
+		if (position != (checkpointsIDList.Length - 1)){// if the finished checkpoint was not the last checkpoint of this game, we lauch the next checkpoint
+			this.ActiveCheckpoint(checkpointsIDList[position+1]);
+		}
+		else
+			Debug.Log("GAME MANAGER --> le jeu est termine !");	
+	}
+
 
 	/* destructor, remove the observer if destroyed */
 	~GameManager(){

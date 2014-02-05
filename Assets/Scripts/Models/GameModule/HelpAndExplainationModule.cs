@@ -19,23 +19,32 @@ public class HelpAndExplainationModule : GameModule{
 
 		if (display){
 			
-			GUI.BeginGroup (new Rect (Screen.width / 2 - constants.FRAME_FOR_GAME_WIDTH/2,
-			                          Screen.height / 2 - constants.FRAME_FOR_GAME_HEIGHT/2,
-			                          constants.FRAME_FOR_GAME_WIDTH,
-			                          constants.FRAME_FOR_GAME_HEIGHT));
+			GUI.BeginGroup (new Rect ((Screen.width / 2 - constants.FRAME_FOR_GAME_WIDTH/2) * DeviceHandler.multiplicator,
+			                          (Screen.height / 2 - constants.FRAME_FOR_GAME_HEIGHT/2) * DeviceHandler.multiplicator,
+			                          constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
+			                          constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator));
 			
 			/********************* Title of the box **************************/ 
 			
 			// Make a background box
-			GUI.Box(new Rect(0,0,constants.FRAME_FOR_GAME_WIDTH,constants.FRAME_FOR_GAME_HEIGHT), "");
+			GUI.Box(new Rect(0 * DeviceHandler.multiplicator,
+			                 0 * DeviceHandler.multiplicator,
+			                 constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
+			                 constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator), "");
 			
 			/********************* sheet **************************/ 
 
-			GUI.DrawTexture(new Rect(0,0,constants.HELP_AND_EXPLAINATION_SHEET_WIDTH,constants.HELP_AND_EXPLAINATION_SHEET_HEIGHT), myGUITexture, ScaleMode.StretchToFill, true, 10.0f);
+			GUI.DrawTexture(new Rect(0 * DeviceHandler.multiplicator,
+			                         0 * DeviceHandler.multiplicator,
+			                         constants.HELP_AND_EXPLAINATION_SHEET_WIDTH * DeviceHandler.multiplicator,
+			                         constants.HELP_AND_EXPLAINATION_SHEET_HEIGHT * DeviceHandler.multiplicator), myGUITexture, ScaleMode.StretchToFill, true, 10.0f);
 
 			/********************* next button **************************/ 
 				
-			if (GUI.Button (new Rect (25, 260, constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT), "Fermer")) {
+			if (GUI.Button (new Rect (25 * DeviceHandler.multiplicator,
+			                          260 * DeviceHandler.multiplicator,
+			                          constants.BUTTON_WIDTH * DeviceHandler.multiplicator,
+			                          constants.BUTTON_HEIGHT * DeviceHandler.multiplicator), "Fermer")) {
 				this.FinishModule();
 			}
 			

@@ -25,31 +25,43 @@ public class QuestionResponseModule : GameModule {
 
 		if (display){
 			
-			GUI.BeginGroup (new Rect (Screen.width / 2 - constants.FRAME_FOR_GAME_WIDTH/2,
-			                          Screen.height / 2 - constants.FRAME_FOR_GAME_HEIGHT/2,
-			                          constants.FRAME_FOR_GAME_WIDTH,
-			                          constants.FRAME_FOR_GAME_HEIGHT));
+			GUI.BeginGroup (new Rect ((Screen.width / 2 - constants.FRAME_FOR_GAME_WIDTH/2) * DeviceHandler.multiplicator,
+			                          (Screen.height / 2 - constants.FRAME_FOR_GAME_HEIGHT/2) * DeviceHandler.multiplicator,
+			                          constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
+			                          constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator));
 	
 				/********************* Title of the box **************************/ 
 				
 				// Make a background box
-			GUI.Box(new Rect(0,0,constants.FRAME_FOR_GAME_WIDTH,constants.FRAME_FOR_GAME_HEIGHT),this.title);
+			GUI.Box(new Rect(0 * DeviceHandler.multiplicator,
+			                 0 * DeviceHandler.multiplicator,
+			                 constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
+			                 constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator),this.title);
 				
 				/********************* Question/Reponce fields **************************/ 
 				
 				if (questions.Length > 0 ) { // si le tableau de question contient au moin une question
 					
 					//add the question label
-					GUI.Label(new Rect (25, 50,  constants.LABEL_WIDTH, constants.LABEL_HEIGHT), questions[idCurrentQuestion]);
+				GUI.Label(new Rect (25 * DeviceHandler.multiplicator,
+				                    50 * DeviceHandler.multiplicator,
+				                    constants.LABEL_WIDTH * DeviceHandler.multiplicator,
+				                    constants.LABEL_HEIGHT * DeviceHandler.multiplicator), questions[idCurrentQuestion]);
 				
 					//add the textfield to get the answer
 					//Debug.Log(playerResponses[idCurrentQuestion]);
-					playerResponses[idCurrentQuestion] = GUI.TextField (new Rect (25, 100, constants.TEXT_FIELD_WIDTH, constants.TEXT_FIELD_HEIGHT), playerResponses[idCurrentQuestion]);
+				playerResponses[idCurrentQuestion] = GUI.TextField (new Rect (25 * DeviceHandler.multiplicator,
+				                                                              100 * DeviceHandler.multiplicator,
+				                                                              constants.TEXT_FIELD_WIDTH * DeviceHandler.multiplicator,
+				                                                              constants.TEXT_FIELD_HEIGHT * DeviceHandler.multiplicator), playerResponses[idCurrentQuestion]);
 					
 					/********************* Response validator button **************************/ 
 
 					// add the button used to validate the answer
-					if (GUI.Button (new Rect (25, 150, constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT), "valider")) {
+				if (GUI.Button (new Rect (25 * DeviceHandler.multiplicator,
+				                          150 * DeviceHandler.multiplicator,
+				                          constants.BUTTON_WIDTH * DeviceHandler.multiplicator,
+				                          constants.BUTTON_HEIGHT * DeviceHandler.multiplicator), "valider")) {
 						
 						// This code is executed when the Button is clicked
 						if ( playerResponses[idCurrentQuestion].Equals(responses[idCurrentQuestion])){

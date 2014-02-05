@@ -6,6 +6,10 @@ public class SwitchViewModule : GameModule {
 	
 	void OnGUI() {
 
+		Debug.Log(" passe bien dans le onGUI de switchViewModule "  );
+
+		Debug.Log(" etat de display :" + display);
+
 		if (display){
 			// Get the camera
 			GameObject goCamera = GameObject.Find("playerView");

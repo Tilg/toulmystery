@@ -51,6 +51,9 @@ public abstract class GameModule : MonoBehaviour{
 	
 	
 	public void BeginModule(Checkpoint callingCheckpoint){
+
+		Debug.Log(callingCheckpoint.id + " apelle begin module de : "+ this.id);
+
 		currentCheckpoint = callingCheckpoint;
 		display = true;
 	}

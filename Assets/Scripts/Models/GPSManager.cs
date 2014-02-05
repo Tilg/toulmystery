@@ -9,8 +9,8 @@ public class GPSManager : MonoBehaviour {
 	GameObject goPlayer;
 	Player player;
 	NSNotificationCenter ns = NSNotificationCenter.defaultCenter;
-	//public float lat;
-	//public float lng;
+	public float lat;
+	public float lng;
 
 	void Start () {
 
@@ -50,9 +50,9 @@ public class GPSManager : MonoBehaviour {
 
 	void RetrieveGPSData() {
 		//Debug.Log("Appel a GPSData"); 
-		LocationInfo currentGPSPosition = Input.location.lastData;
+		//LocationInfo currentGPSPosition = Input.location.lastData;
 
-		//Point currentGPSPosition = new Point( lat, lng);
+		Point currentGPSPosition = new Point( lat, lng);
 
 		float currentPlayerLat = player.getPosLat();
 		float currentPlayerLong =  player.getPosLng();
@@ -101,13 +101,13 @@ public class GPSManager : MonoBehaviour {
 	}
 
 
-	//private class Point {
-	//	public float latitude;
-	//	public float longitude;
+	private class Point {
+		public float latitude;
+		public float longitude;
 
-	//	public Point(float latP, float lngP){
-	//		latitude = latP;
-	//		longitude =lngP;
-	//	}
-	//}
+		public Point(float latP, float lngP){
+			latitude = latP;
+			longitude =lngP;
+		}
+	}
 }

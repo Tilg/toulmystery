@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour {
 
 	public void UpdateGpsData(NSNotification aNotification){
 
-
 		Debug.Log("GAME MANAGER --> notification changement coordonnée gps recues");	
 		Debug.Log("GAME MANAGER --> etat de playerIsPlaying : "+playerIsPlaying);
 		if ( ! playerIsPlaying ){ //if the player is not playing, we check if he is near to an active checkpoint 
@@ -64,15 +63,9 @@ public class GameManager : MonoBehaviour {
 		if (checkpointsList.Count == checkpointsIDList.Length){
 			// we lauch the first checkpoint
 
-			Debug.Log("GAME MANAGER --> le dernier checkpoint s'est enregistré, le jeu peut commencer.");
-
 			foreach (Checkpoint checkpointX in checkpointsList){
 
-				Debug.Log("GAME MANAGER --> id du checkpoint  : "+ checkpointX.id);
-				Debug.Log("GAME MANAGER --> id du premier checkpoint de la liste  : "+ checkpointsIDList[0]);
-
 				if ( checkpointX.id.Equals(checkpointsIDList[0])){	
-					Debug.Log("GAME MANAGER --> le checkpoint suivant est placé dans la liste des checkpoints activés : " + checkpointX.id );
 					availabeCheckpointsList.Add(checkpointX);
 				}
 			}
@@ -126,29 +119,20 @@ public class GameManager : MonoBehaviour {
 
 	public void CheckForAvailableCheckpoint( float latitudeParam, float longitudeParam){
 
-		Debug.Log("GAME MANAGER --> checkForAvailableCheckpoint at : ");
-		Debug.Log("latitudeParam : "+ latitudeParam);
-		Debug.Log("longitudeParam : "+ longitudeParam);
-
 		ArrayList availableAndInRangeCheckpointsList = new ArrayList();
 
-		Debug.Log("nb de checkpoint dans la liste de checkpoint disponible : "+ availabeCheckpointsList.Count);
 
 		foreach (Checkpoint checkpointX in availabeCheckpointsList){
 
 			//we are calculating the distance between the coordonates of the player and the coordonates of the checkpointX
 			float distanceBetweenPlayerAndCheckpoint = (Transpose.getDistWorld(latitudeParam,longitudeParam,checkpointX.latitude,checkpointX.longitude)*1000f); // getDistworld return a result in kilometers, *1000 to have the result in meters
-			Debug.Log("distance entre le checkpoint "+ checkpointX.id + " est les coordonnées du joueur reçues du GPSManager : " + distanceBetweenPlayerAndCheckpoint);
-			Debug.Log("distance d'activation du checkpoint : "+checkpointX.rangeInMeters);
 
 			//if the distance is in the activation area of the checkpoint
 			if ( distanceBetweenPlayerAndCheckpoint <= checkpointX.rangeInMeters ){
 				availableAndInRangeCheckpointsList.Add(checkpointX);
-				Debug.Log("le checkpoint est ajouté a la liste des checkpoint pouvant être lancé");
 			} 
 		}
 
-		Debug.Log("taille de la liste des checkpoint disponible et dont on est a distance d'activation : " + availableAndInRangeCheckpointsList.Count);
 		if (availableAndInRangeCheckpointsList.Count > 0){ // if a checkpoint can be lauch
 			
 			if (availableAndInRangeCheckpointsList.Count == 1){ // if we have just one checkpoint, we lauch it

@@ -49,7 +49,6 @@
      <Compile Include="Assets\Dev only\Editor\CaptureView.cs" />
      <Compile Include="Assets\Editor\ATest.cs" />
      <Compile Include="Assets\Editor\EditorGPSPoint.cs" />
-     <Compile Include="Assets\Editor\EditorWord.cs" />
      <Compile Include="Assets\Editor\Fences.cs" />
      <Compile Include="Assets\Editor\GenerateTerrainHeights.cs" />
      <Compile Include="Assets\Editor\IlotButtonEditor.cs" />

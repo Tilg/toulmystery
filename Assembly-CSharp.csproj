@@ -59,13 +59,11 @@
      <Compile Include="Assets\Scripts\Models\GPSManager.cs" />
      <Compile Include="Assets\Scripts\Models\GPSPoint.cs" />
      <Compile Include="Assets\Scripts\Models\GameManager.cs" />
-     <Compile Include="Assets\Scripts\Models\GameModule\CrosswordModule.cs" />
      <Compile Include="Assets\Scripts\Models\GameModule\GameModule.cs" />
      <Compile Include="Assets\Scripts\Models\GameModule\HelpAndExplainationModule.cs" />
      <Compile Include="Assets\Scripts\Models\GameModule\MultipleChoiceQuestionModule.cs" />
      <Compile Include="Assets\Scripts\Models\GameModule\QuestionResponseModule.cs" />
      <Compile Include="Assets\Scripts\Models\GameModule\SwitchViewModule.cs" />
-     <Compile Include="Assets\Scripts\Models\GameModule\Word.cs" />
      <Compile Include="Assets\Scripts\Models\InformationSheet.cs" />
      <Compile Include="Assets\Scripts\Models\MapInitialisation.cs" />
      <Compile Include="Assets\Scripts\Models\Player.cs" />

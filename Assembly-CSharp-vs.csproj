@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Menus\Menu.cs" />
      <Compile Include="Assets\Scripts\Models\ChangeView.cs" />
      <Compile Include="Assets\Scripts\Models\Checkpoint.cs" />
+     <Compile Include="Assets\Scripts\Models\Constants.cs" />
      <Compile Include="Assets\Scripts\Models\DeviceHandler.cs" />
      <Compile Include="Assets\Scripts\Models\GPSManager.cs" />
      <Compile Include="Assets\Scripts\Models\GPSPoint.cs" />
@@ -68,9 +69,7 @@
      <Compile Include="Assets\Scripts\Models\InformationSheet.cs" />
      <Compile Include="Assets\Scripts\Models\MapInitialisation.cs" />
      <Compile Include="Assets\Scripts\Models\Player.cs" />
-     <Compile Include="Assets\Scripts\Models\TestCustomGUI.cs" />
      <Compile Include="Assets\Scripts\Models\Transpose.cs" />
-     <Compile Include="Assets\Scripts\Models\constants.cs" />
      <Compile Include="Assets\Scripts\Models\observable.cs" />
      <Compile Include="Assets\Scripts\Models\observer.cs" />
      <Compile Include="Assets\Scripts\MouseClic.cs" />

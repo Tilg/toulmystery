@@ -32,7 +32,7 @@ public class MultipleChoiceQuestionModule : GameModule {
 
 			for ( int i=0 ; i<listeReponsesPossibles.Length ; i++){
 
-				string texture = "Assets/Resources/Textures/" + listeReponsesPossibles[i] + ".png";
+				string texture = "Assets/Resources/" + listeReponsesPossibles[i] + ".png";
 
 				possibleImageResponse[i] = (Texture2D)Resources.LoadAssetAtPath(texture, typeof(Texture2D));
 			}
@@ -45,51 +45,54 @@ public class MultipleChoiceQuestionModule : GameModule {
 	
 	// fonction used to construct the GUI
 	void OnGUI () {
+
+		//GUI.skin.label.font = GUI.skin.button.font = GUI.skin.box.font = font;
+		GUI.skin.label.fontSize = GUI.skin.box.fontSize = GUI.skin.button.fontSize = GUI.skin.textField.fontSize = (int) (Constants.FONT_SIZE * DeviceHandler.multiplicator);
 		
 		if (display){
 			
-			GUI.BeginGroup (new Rect ((Screen.width / 2 - constants.FRAME_FOR_GAME_WIDTH/2) * DeviceHandler.multiplicator,
-			                          (Screen.height / 2 - constants.FRAME_FOR_GAME_HEIGHT/2) * DeviceHandler.multiplicator,
-			                          constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
-			                          constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator));
+			GUI.BeginGroup (new Rect ((Screen.width / 2 - Constants.FRAME_FOR_GAME_WIDTH/2) * DeviceHandler.multiplicator,
+			                          (Screen.height / 2 - Constants.FRAME_FOR_GAME_HEIGHT/2) * DeviceHandler.multiplicator,
+			                          Constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
+			                          Constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator));
 			
 			/********************* Title of the box **************************/ 
 			
 			// Make a background box
 			GUI.Box(new Rect(0 * DeviceHandler.multiplicator,
 			                 0 * DeviceHandler.multiplicator,
-			                 constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
-			                 constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator), title);
+			                 Constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
+			                 Constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator), title);
 
 
 			/********************* question **************************/ 
 
-			GUI.Label(new Rect (25 * DeviceHandler.multiplicator,
-			                    30 * DeviceHandler.multiplicator,
-			                    constants.LABEL_WIDTH * DeviceHandler.multiplicator,
-			                    constants.LABEL_HEIGHT * DeviceHandler.multiplicator), question);
+			GUI.Label(new Rect (Constants.LEFT_GAP * DeviceHandler.multiplicator,
+			                    Constants.GAP_BETWEEN_COMPONENT * DeviceHandler.multiplicator,
+			                    Constants.LABEL_WIDTH * DeviceHandler.multiplicator,
+			                    Constants.LABEL_HEIGHT * DeviceHandler.multiplicator), question);
 
 			/********************* answer list **************************/ 
 
 			if (responseType.Equals (typeDeReponse.image)) {
-				selectedElement = GUI.SelectionGrid(new Rect(25 * DeviceHandler.multiplicator,
-				                                             90 * DeviceHandler.multiplicator,
-				                                             constants.QCM_CHOICE_WIDTH * DeviceHandler.multiplicator,
-				                                             constants.QCM_CHOICE_HEIGHT * DeviceHandler.multiplicator), selectedElement, possibleImageResponse, numberOfElementInALine);
+				selectedElement = GUI.SelectionGrid(new Rect(Constants.LEFT_GAP * DeviceHandler.multiplicator,
+				                                             2*Constants.GAP_BETWEEN_COMPONENT * DeviceHandler.multiplicator + Constants.LABEL_HEIGHT * DeviceHandler.multiplicator,
+				                                             Constants.QCM_CHOICE_WIDTH * DeviceHandler.multiplicator,
+				                                             Constants.QCM_CHOICE_HEIGHT * DeviceHandler.multiplicator), selectedElement, possibleImageResponse, numberOfElementInALine);
 			}else{
-				selectedElement = GUI.SelectionGrid(new Rect(25 * DeviceHandler.multiplicator,
-				                                             90 * DeviceHandler.multiplicator,
-				                                             constants.QCM_CHOICE_WIDTH * DeviceHandler.multiplicator,
-				                                             constants.QCM_CHOICE_HEIGHT * DeviceHandler.multiplicator), selectedElement, listeReponsesPossibles, numberOfElementInALine);
+				selectedElement = GUI.SelectionGrid(new Rect(Constants.LEFT_GAP * DeviceHandler.multiplicator,
+				                                             2*Constants.GAP_BETWEEN_COMPONENT  * DeviceHandler.multiplicator + Constants.LABEL_HEIGHT * DeviceHandler.multiplicator,
+				                                             Constants.QCM_CHOICE_WIDTH * DeviceHandler.multiplicator,
+				                                             Constants.QCM_CHOICE_HEIGHT * DeviceHandler.multiplicator), selectedElement, listeReponsesPossibles, numberOfElementInALine);
 			}
 
 
-			/********************* next button **************************/ 
+			/********************* valider button **************************/ 
 			
-			if (GUI.Button (new Rect (25 * DeviceHandler.multiplicator,
-			                          260 * DeviceHandler.multiplicator,
-			                          constants.BUTTON_WIDTH * DeviceHandler.multiplicator,
-			                          constants.BUTTON_HEIGHT * DeviceHandler.multiplicator), "Valider")) {
+			if (GUI.Button (new Rect ((Constants.FRAME_FOR_GAME_WIDTH / 2 - Constants.BUTTON_WIDTH/2) * DeviceHandler.multiplicator,
+			                          Constants.Y_BOTTOM_BUTTON * DeviceHandler.multiplicator,
+			                          Constants.BUTTON_WIDTH * DeviceHandler.multiplicator,
+			                          Constants.BUTTON_HEIGHT * DeviceHandler.multiplicator), "Valider")) {
 				if ( selectedElement == numeroElementCorrect ){
 					this.FinishModule();
 				}

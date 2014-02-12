@@ -16,8 +16,13 @@ public class GameManager : MonoBehaviour {
 
 	private bool playerIsPlaying = false;
 	
+	private float lastLat;
+	private float lastLong;
+	
 	/* Used to initiate the link between objetct with observer/observable pattern */
 	void Awake() {
+
+		Debug.Log("Application.dataPath : " + Application.dataPath );
 		
 		checkpointsList = new ArrayList();
 		availabeCheckpointsList = new ArrayList();
@@ -45,6 +50,9 @@ public class GameManager : MonoBehaviour {
 			float newLat = (float) additionnalDataTable["newLatitude"];
 			float newLong = (float) additionnalDataTable["newLongitude"];
 
+			lastLat = newLat;
+			lastLong = newLong;
+
 			CheckForAvailableCheckpoint( newLat, newLong );
 		}
 	}
@@ -60,9 +68,6 @@ public class GameManager : MonoBehaviour {
 		// if all the checkpoints are registered
 		if (checkpointsList.Count == checkpointsIDList.Length){
 			// we lauch the first checkpoint
-
-			Debug.Log("Tous les checkpoints ont fini de s'enregistrer");
-
 			foreach (Checkpoint checkpointX in checkpointsList){
 
 				if ( checkpointX.id.Equals(checkpointsIDList[0])){	
@@ -82,14 +87,13 @@ public class GameManager : MonoBehaviour {
 				availabeCheckpointsList.Add(checkpointX);
 			}
 		}
+
+		// we are checking if a checkpoint is availlable with the last gps position receive. Usefull when a you have multiple checkpoints at the same place.
+		CheckForAvailableCheckpoint( lastLat, lastLong );
 	}
 
 
 	public void CheckForAvailableCheckpoint( float latitudeParam, float longitudeParam){
-
-		Debug.Log("Recherche de checkpoint disponible");
-
-		Debug.Log("nombre de checkponit disponible : "+ availabeCheckpointsList.Count);
 
 		ArrayList availableAndInRangeCheckpointsList = new ArrayList();
 
@@ -106,8 +110,7 @@ public class GameManager : MonoBehaviour {
 			} 
 		}
 
-		Debug.Log("nombre de checkponit disponible et a porté du joueur : "+ availableAndInRangeCheckpointsList.Count );
-
+		Debug.Log(" nombre de checkpoint disponible et a distance : "+  availableAndInRangeCheckpointsList.Count);
 		if (availableAndInRangeCheckpointsList.Count > 0){ // if a checkpoint can be lauch
 			
 			if (availableAndInRangeCheckpointsList.Count == 1){ // if we have just one checkpoint, we lauch it
@@ -130,6 +133,7 @@ public class GameManager : MonoBehaviour {
 				}
 
 				// we lauch the checkpoint
+
 				LoadCheckpoint(selectedCheckpoint);
 			}
 		}
@@ -142,6 +146,8 @@ public class GameManager : MonoBehaviour {
 		nextCheckpoint.Lauch(null);
 	}
 
+
+	/* function called by a checkpoint whn it finished */
 	public void LoadNextCheckpoint(string  finishedCheckpointID){		
 		
 		playerIsPlaying = false; //the function is called by a finised checkpoint so the player is available 
@@ -165,6 +171,7 @@ public class GameManager : MonoBehaviour {
 		
 		if (position != (checkpointsIDList.Length - 1)){// if the finished checkpoint was not the last checkpoint of this game, we lauch the next checkpoint
 			this.ActiveCheckpoint(checkpointsIDList[position+1]);
+
 		}
 		else
 			Debug.Log("GAME MANAGER --> le jeu est termine !");	

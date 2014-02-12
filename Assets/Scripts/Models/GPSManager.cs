@@ -50,9 +50,9 @@ public class GPSManager : MonoBehaviour {
 
 	void RetrieveGPSData() {
 		//Debug.Log("Appel a GPSData"); 
-		//LocationInfo currentGPSPosition = Input.location.lastData;
+		LocationInfo currentGPSPosition = Input.location.lastData;
 
-		Point currentGPSPosition = new Point( lat, lng);
+		//Point currentGPSPosition = new Point( lat, lng);
 
 		float currentPlayerLat = player.getPosLat();
 		float currentPlayerLong =  player.getPosLng();
@@ -86,12 +86,12 @@ public class GPSManager : MonoBehaviour {
 	}
 
 
-	void OnGUI(){
+	//void OnGUI(){
 		// Make a background box 
-		GUI.Box(new Rect(10,10,500,100), "Position actuelle"); 
-		GUI.Label (new Rect(20,30,300,50), "Latitude : " + this.player.getPosLat().ToString());
-		GUI.Label (new Rect(20,45,300,50), "Longitude : " + this.player.getPosLng().ToString());
-	}
+	//	GUI.Box(new Rect(10,10,500,100), "Position actuelle"); 
+	//	GUI.Label (new Rect(20,30,300,50), "Latitude : " + this.player.getPosLat().ToString());
+	//	GUI.Label (new Rect(20,45,300,50), "Longitude : " + this.player.getPosLng().ToString());
+	//}
 
 
 	private class Point {

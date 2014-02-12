@@ -51,17 +51,28 @@
      <Compile Include="Assets\Editor\Fences.cs" />
      <Compile Include="Assets\Editor\GenerateTerrainHeights.cs" />
      <Compile Include="Assets\Editor\IlotButtonEditor.cs" />
+     <Compile Include="Assets\Editor\QCAR\SampleImport\SampleImport.cs" />
+     <Compile Include="Assets\Editor\QCAR\Scripts\ComponentFactoryStarter\ComponentFactoryStarter.cs" />
+     <Compile Include="Assets\Editor\QCAR\Scripts\Unzipper\SharpZipLibUnzipper.cs" />
      <Compile Include="Assets\Editor\UpdateBuildings.cs" />
      <Compile Include="Assets\Editor\VegetationMesh.cs" />
      <Compile Include="Assets\Editor\VegetationMonoTerrain.cs" />
      <Compile Include="Assets\Editor\VegetationMultiTerrains.cs" />
-     <None Include="Assets\Ressources\3D\Terrain items\zone1_vegCours.txt" />
-     <None Include="Assets\Ressources\3D\Terrain items\zone1_vegRamparts.txt" />
-     <None Include="Assets\Ressources\3D\Terrain items\zone2_vegetation.txt" />
-     <None Include="Assets\Ressources\3D\Terrain items\zone2_haies.txt" />
-     <None Include="Assets\Ressources\3D\Terrain items\zone2_vigne.txt" />
+     <None Include="Assets\readme_SDK.txt" />
+     <None Include="Assets\license_3rdpartynotice.txt" />
+     <None Include="Assets\Qualcomm Augmented Reality\Shaders\RenderVideoBackground.shader" />
+     <None Include="Assets\StreamingAssets\QCAR\testVuforia.xml" />
+     <None Include="Assets\Editor\QCAR\WebcamProfiles\profiles.xml" />
+     <None Include="Assets\Qualcomm Augmented Reality\Shaders\DepthMask.shader" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+     <None Include="Assets\StreamingAssets\QCAR\unity.txt" />
      <None Include="Assets\Scripts\Menus\ilotbuttonparams.txt" />
+     <None Include="Assets\Qualcomm Augmented Reality\Shaders\BrightTexture.shader" />
      <None Include="Assets\Scripts\Roll over\displayedStrings.txt" />
+     <None Include="Assets\Qualcomm Augmented Reality\Shaders\Text3D.shader" />
+ <Reference Include="Library\ScriptAssemblies\Assembly-UnityScript-Editor-firstpass">
+ <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-Editor-firstpass.dll</HintPath>
+ </Reference>
  <Reference Include="\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs">
  <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -73,6 +84,12 @@
  </Reference>
  <Reference Include="\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions">
  <HintPath>\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Qualcomm Augmented Reality\Scripts\Internal\Qualcomm.Vuforia.UnityExtensions">
+ <HintPath>Assets\Qualcomm Augmented Reality\Scripts\Internal\Qualcomm.Vuforia.UnityExtensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Editor\QCAR\Scripts\Qualcomm.Vuforia.UnityExtensions.Editor">
+ <HintPath>Assets\Editor\QCAR\Scripts\Qualcomm.Vuforia.UnityExtensions.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

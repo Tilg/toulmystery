@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Dev only\Editor\CaptureView.cs" />
      <Compile Include="Assets\Editor\ATest.cs" />
      <Compile Include="Assets\Editor\EditorGPSPoint.cs" />
      <Compile Include="Assets\Editor\Fences.cs" />
@@ -56,13 +55,11 @@
      <Compile Include="Assets\Editor\VegetationMesh.cs" />
      <Compile Include="Assets\Editor\VegetationMonoTerrain.cs" />
      <Compile Include="Assets\Editor\VegetationMultiTerrains.cs" />
-     <None Include="Assets\Terrain items\zone1_vegCours.txt" />
-     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
-     <None Include="Assets\Terrain items\zone1_vegRamparts.txt" />
-     <None Include="Assets\Terrain items\zone2_vegetation.txt" />
-     <None Include="Assets\Terrain items\zone2_haies.txt" />
-     <None Include="Assets\Resources\testLinks.txt" />
-     <None Include="Assets\Terrain items\zone2_vigne.txt" />
+     <None Include="Assets\Ressources\3D\Terrain items\zone1_vegCours.txt" />
+     <None Include="Assets\Ressources\3D\Terrain items\zone1_vegRamparts.txt" />
+     <None Include="Assets\Ressources\3D\Terrain items\zone2_vegetation.txt" />
+     <None Include="Assets\Ressources\3D\Terrain items\zone2_haies.txt" />
+     <None Include="Assets\Ressources\3D\Terrain items\zone2_vigne.txt" />
      <None Include="Assets\Scripts\Menus\ilotbuttonparams.txt" />
      <None Include="Assets\Scripts\Roll over\displayedStrings.txt" />
  <Reference Include="\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs">
@@ -79,10 +76,6 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{909CD52A-B822-757B-8755-D9D91E973238}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
-    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{42C86EAC-802B-9511-B245-47F2F07E13E5}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{CA0B57D2-8A77-4E49-FFC6-1FC441858CB0}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>

@@ -52,7 +52,6 @@
      <None Include="Assets\Terrain items\zone1_vegRamparts.txt" />
      <None Include="Assets\Terrain items\zone2_vegetation.txt" />
      <None Include="Assets\Terrain items\zone2_haies.txt" />
-     <None Include="Assets\Resources\testLinks.txt" />
      <None Include="Assets\Terrain items\zone2_vigne.txt" />
      <None Include="Assets\Scripts\Menus\ilotbuttonparams.txt" />
      <None Include="Assets\Scripts\Roll over\displayedStrings.txt" />

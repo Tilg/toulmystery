@@ -2,9 +2,14 @@ using UnityEngine;
 using System.Collections;
 using NotificationCenter;
 
+
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour {
 	
-	
+
+	public AudioClip checkpointBeginSound;
+	public AudioSource audioSource;
+
 	public string[] checkpointsIDList;
 	
 	private string moduleName = "GameManager";
@@ -21,8 +26,6 @@ public class GameManager : MonoBehaviour {
 	
 	/* Used to initiate the link between objetct with observer/observable pattern */
 	void Awake() {
-
-		Debug.Log("Application.dataPath : " + Application.dataPath );
 		
 		checkpointsList = new ArrayList();
 		availabeCheckpointsList = new ArrayList();
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour {
 		// The gameMangaer listen the GPSManager
 		nsNotifCenter.addObserverSelectorNameObject(this,this.UpdateGpsData,"GPSManager",null);
 
+		audioSource.clip = checkpointBeginSound;
 	}
 	
 	void Start() {
@@ -102,7 +106,6 @@ public class GameManager : MonoBehaviour {
 			//we are calculating the distance between the coordonates of the player and the coordonates of the checkpointX
 			float distanceBetweenPlayerAndCheckpoint = (Transpose.getDistWorld(latitudeParam,longitudeParam,checkpointX.latitude,checkpointX.longitude)*1000f); // getDistworld return a result in kilometers, *1000 to have the result in meters
 
-			Debug.Log("distance entre le checkpoint "+checkpointX.id +" et le joueur : "+ distanceBetweenPlayerAndCheckpoint);
 
 			//if the distance is in the activation area of the checkpoint
 			if ( distanceBetweenPlayerAndCheckpoint <= checkpointX.rangeInMeters ){
@@ -110,7 +113,6 @@ public class GameManager : MonoBehaviour {
 			} 
 		}
 
-		Debug.Log(" nombre de checkpoint disponible et a distance : "+  availableAndInRangeCheckpointsList.Count);
 		if (availableAndInRangeCheckpointsList.Count > 0){ // if a checkpoint can be lauch
 			
 			if (availableAndInRangeCheckpointsList.Count == 1){ // if we have just one checkpoint, we lauch it
@@ -142,6 +144,7 @@ public class GameManager : MonoBehaviour {
 
 	/* fonction used to lauch a request to checkpoint with the id of the checkpoint that we want to lauch */
 	public void LoadCheckpoint(Checkpoint nextCheckpoint){
+		audioSource.Play();
 		playerIsPlaying = true;
 		nextCheckpoint.Lauch(null);
 	}

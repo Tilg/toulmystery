@@ -17,7 +17,7 @@ public class SwitchViewModule : GameModule {
 			GameObject goCamera = GameObject.Find("playerView");
 			ChangeView changeView = (ChangeView)goCamera.GetComponent ("ChangeView");
 
-			if (GUI.Button(new Rect((Screen.width / 2 - Constants.BUTTON_WIDTH/2) * DeviceHandler.multiplicator,
+			if (GUI.Button(new Rect((Screen.width / 2 - Constants.BUTTON_WIDTH* DeviceHandler.multiplicator/2),
 			                        Constants.Y_BOTTOM_BUTTON * DeviceHandler.multiplicator - Constants.BUTTON_HEIGHT * DeviceHandler.multiplicator - Constants.GAP_BETWEEN_COMPONENT * DeviceHandler.multiplicator,
 			                        Constants.BUTTON_WIDTH  * DeviceHandler.multiplicator, // width
 			                        Constants.BUTTON_HEIGHT * DeviceHandler.multiplicator), "Camera")){ //height
@@ -28,7 +28,7 @@ public class SwitchViewModule : GameModule {
 			}
 
 
-			if (GUI.Button (new Rect ((Screen.width / 2 - Constants.BUTTON_WIDTH/2) * DeviceHandler.multiplicator,
+			if (GUI.Button (new Rect ((Screen.width / 2 - Constants.BUTTON_WIDTH* DeviceHandler.multiplicator/2),
 			                          Constants.Y_BOTTOM_BUTTON * DeviceHandler.multiplicator,
 			                          Constants.BUTTON_WIDTH * DeviceHandler.multiplicator,
 			                          Constants.BUTTON_HEIGHT * DeviceHandler.multiplicator), "Fermer")) {

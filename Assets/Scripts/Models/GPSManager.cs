@@ -50,9 +50,9 @@ public class GPSManager : MonoBehaviour {
 
 	void RetrieveGPSData() {
 		//Debug.Log("Appel a GPSData"); 
-		LocationInfo currentGPSPosition = Input.location.lastData;
 
-		//Point currentGPSPosition = new Point( lat, lng);
+		LocationInfo currentGPSPosition = Input.location.lastData;
+		//Point currentGPSPosition = new Point( lat, lng); // used to debug on unity
 
 		float currentPlayerLat = player.getPosLat();
 		float currentPlayerLong =  player.getPosLng();

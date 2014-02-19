@@ -10,24 +10,25 @@ public class HelpAndExplainationModule : GameModule{
 
 	void Awake () {
 
-		string texture = "Assets/Resources/" + nomFeuilleInfo + ".png";
-		myGUITexture = (Texture2D)Resources.LoadAssetAtPath(texture, typeof(Texture2D));
+		myGUITexture = Resources.Load(Constants.PATH_TO_HELP_AND_EXPLAINATION_SHEET + nomFeuilleInfo) as Texture2D;
 	}
 
 	// fonction used to construct the GUI
 	void OnGUI () {
+
 
 		//GUI.skin.label.font = GUI.skin.button.font = GUI.skin.box.font = font;
 		GUI.skin.label.fontSize = GUI.skin.box.fontSize = GUI.skin.button.fontSize = GUI.skin.textField.fontSize = (int) (Constants.FONT_SIZE * DeviceHandler.multiplicator);
 
 		if (display){
 			
-			GUI.BeginGroup (new Rect ((Screen.width / 2 - Constants.FRAME_FOR_GAME_WIDTH/2) * DeviceHandler.multiplicator,
-			                          (Screen.height / 2 - Constants.FRAME_FOR_GAME_HEIGHT/2) * DeviceHandler.multiplicator,
+			GUI.BeginGroup (new Rect ((Screen.width / 2 - Constants.FRAME_FOR_GAME_WIDTH* DeviceHandler.multiplicator/2) ,
+			                          (Screen.height / 2 - Constants.FRAME_FOR_GAME_HEIGHT* DeviceHandler.multiplicator/2),
 			                          Constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
 			                          Constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator));
 			
 			/********************* Title of the box **************************/ 
+
 			
 			// Make a background box
 			GUI.Box(new Rect(0 * DeviceHandler.multiplicator,
@@ -44,7 +45,7 @@ public class HelpAndExplainationModule : GameModule{
 
 			/********************* next button **************************/ 
 				
-			if (GUI.Button (new Rect ((Constants.FRAME_FOR_GAME_WIDTH / 2 - Constants.BUTTON_WIDTH/2) * DeviceHandler.multiplicator,
+			if (GUI.Button (new Rect ((Constants.FRAME_FOR_GAME_WIDTH* DeviceHandler.multiplicator / 2 - Constants.BUTTON_WIDTH* DeviceHandler.multiplicator/2),
 			                          Constants.Y_BOTTOM_BUTTON * DeviceHandler.multiplicator,
 			                          Constants.BUTTON_WIDTH * DeviceHandler.multiplicator,
 			                          Constants.BUTTON_HEIGHT * DeviceHandler.multiplicator), "Fermer")) {

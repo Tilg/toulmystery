@@ -26,12 +26,10 @@ public class QuestionResponseModule : GameModule {
 		//GUI.skin.label.font = GUI.skin.button.font = GUI.skin.box.font = font;
 		GUI.skin.label.fontSize = GUI.skin.box.fontSize = GUI.skin.button.fontSize = GUI.skin.textField.fontSize = (int) (Constants.FONT_SIZE * DeviceHandler.multiplicator);
 
-		Debug.Log( "DeviceHandler.multiplicator : "+DeviceHandler.multiplicator);
-
 		if (display){
 			
-			GUI.BeginGroup (new Rect ((Screen.width / 2 - Constants.FRAME_FOR_GAME_WIDTH/2) * DeviceHandler.multiplicator,
-			                          (Screen.height / 2 - Constants.FRAME_FOR_GAME_HEIGHT/2) * DeviceHandler.multiplicator,
+			GUI.BeginGroup (new Rect ((Screen.width / 2 - Constants.FRAME_FOR_GAME_WIDTH* DeviceHandler.multiplicator/2),
+			                          (Screen.height / 2 - Constants.FRAME_FOR_GAME_HEIGHT* DeviceHandler.multiplicator/2),
 			                          Constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
 			                          Constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator));
 	

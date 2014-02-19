@@ -31,10 +31,7 @@ public class MultipleChoiceQuestionModule : GameModule {
 			possibleImageResponse = new Texture2D[listeReponsesPossibles.Length];
 
 			for ( int i=0 ; i<listeReponsesPossibles.Length ; i++){
-
-				string texture = "Assets/Resources/" + listeReponsesPossibles[i] + ".png";
-
-				possibleImageResponse[i] = (Texture2D)Resources.LoadAssetAtPath(texture, typeof(Texture2D));
+				possibleImageResponse[i] = Resources.Load(Constants.PATH_TO_MULITPLE_CHOICE_RESOURCES + listeReponsesPossibles[i]) as Texture2D;
 			}
 		}else{
 			if (listeReponsesPossibles.Length > 8) {
@@ -51,8 +48,8 @@ public class MultipleChoiceQuestionModule : GameModule {
 		
 		if (display){
 			
-			GUI.BeginGroup (new Rect ((Screen.width / 2 - Constants.FRAME_FOR_GAME_WIDTH/2) * DeviceHandler.multiplicator,
-			                          (Screen.height / 2 - Constants.FRAME_FOR_GAME_HEIGHT/2) * DeviceHandler.multiplicator,
+			GUI.BeginGroup (new Rect ((Screen.width / 2 - Constants.FRAME_FOR_GAME_WIDTH* DeviceHandler.multiplicator/2),
+			                          (Screen.height / 2 - Constants.FRAME_FOR_GAME_HEIGHT* DeviceHandler.multiplicator/2),
 			                          Constants.FRAME_FOR_GAME_WIDTH * DeviceHandler.multiplicator,
 			                          Constants.FRAME_FOR_GAME_HEIGHT * DeviceHandler.multiplicator));
 			
@@ -89,7 +86,7 @@ public class MultipleChoiceQuestionModule : GameModule {
 
 			/********************* valider button **************************/ 
 			
-			if (GUI.Button (new Rect ((Constants.FRAME_FOR_GAME_WIDTH / 2 - Constants.BUTTON_WIDTH/2) * DeviceHandler.multiplicator,
+			if (GUI.Button (new Rect ((Constants.FRAME_FOR_GAME_WIDTH* DeviceHandler.multiplicator / 2 - Constants.BUTTON_WIDTH* DeviceHandler.multiplicator/2),
 			                          Constants.Y_BOTTOM_BUTTON * DeviceHandler.multiplicator,
 			                          Constants.BUTTON_WIDTH * DeviceHandler.multiplicator,
 			                          Constants.BUTTON_HEIGHT * DeviceHandler.multiplicator), "Valider")) {

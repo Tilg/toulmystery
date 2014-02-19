@@ -68,10 +68,15 @@ public class GameManager : MonoBehaviour {
 		Checkpoint newCheckpoint =  (Checkpoint)aNotification.obj ;
 
 		checkpointsList.Add(newCheckpoint);	
+
+		//Debug.Log("checkpoint s'enregistre: " + newCheckpoint.id );
 		
 		// if all the checkpoints are registered
 		if (checkpointsList.Count == checkpointsIDList.Length){
 			// we lauch the first checkpoint
+
+			//Debug.Log("tous les checkpoints sont enregistrés");
+
 			foreach (Checkpoint checkpointX in checkpointsList){
 
 				if ( checkpointX.id.Equals(checkpointsIDList[0])){	
@@ -113,6 +118,8 @@ public class GameManager : MonoBehaviour {
 			} 
 		}
 
+		//Debug.Log("nb checkpoint dispo"+ availableAndInRangeCheckpointsList.Count);
+
 		if (availableAndInRangeCheckpointsList.Count > 0){ // if a checkpoint can be lauch
 			
 			if (availableAndInRangeCheckpointsList.Count == 1){ // if we have just one checkpoint, we lauch it
@@ -144,6 +151,7 @@ public class GameManager : MonoBehaviour {
 
 	/* fonction used to lauch a request to checkpoint with the id of the checkpoint that we want to lauch */
 	public void LoadCheckpoint(Checkpoint nextCheckpoint){
+		//Debug.Log("passe par le lancement de checkpoint");
 		audioSource.Play();
 		playerIsPlaying = true;
 		nextCheckpoint.Lauch(null);
